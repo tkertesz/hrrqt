@@ -13,8 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    RaceRode.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    RaceRode.hpp \
+    Player.hpp
 
 FORMS    += mainwindow.ui
