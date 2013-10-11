@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-/*Feli volt */
+/*Feli volt
+Tibi volt
+*/
 
 int main(int argc, char *argv[])
 {
