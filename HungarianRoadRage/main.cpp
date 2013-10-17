@@ -2,7 +2,7 @@
 #include <QApplication>
 
 /*Feli volt
-Tibi volt
+  Tibi volt
 */
 
 int main(int argc, char *argv[])
