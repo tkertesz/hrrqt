@@ -11,6 +11,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HungarianRoadRage
 TEMPLATE = app
 
+CONFIG += MYHOTOSXMACHINE
+
+MYHOTOSXMACHINE {
+    INCLUDEPATH += /opt/local/include/
+    LIBS += -L/opt/local/lib/
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
