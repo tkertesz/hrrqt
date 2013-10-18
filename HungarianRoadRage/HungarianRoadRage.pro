@@ -15,7 +15,6 @@ TEMPLATE = app
 #
 CONFIG += OSXMACHINE
 
-
 OSXMACHINE {
     INCLUDEPATH += /opt/local/include
     LIBS += -L/opt/local/lib
