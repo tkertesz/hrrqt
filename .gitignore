@@ -1,0 +1,14 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.app
+
+# User files for Qt Creator #
+###################
+*.user
+*.user.*
