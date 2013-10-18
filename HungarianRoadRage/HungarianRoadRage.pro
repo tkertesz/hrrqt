@@ -10,7 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = HungarianRoadRage
 TEMPLATE = app
-
+#
+# For Open CV and etc.
+#
 CONFIG += MYHOTOSXMACHINE
 
 MYHOTOSXMACHINE {
