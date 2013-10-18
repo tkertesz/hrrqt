@@ -19,11 +19,8 @@ MYHOTOSXMACHINE {
 }
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    RaceRode.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    RaceRode.hpp \
-    Player.hpp
+HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
