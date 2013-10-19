@@ -15,12 +15,17 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
    // MainWindow w;
    // w.show();
-    cv::Mat mat;
-        mat = cv::imread("/Users/hummerdikk/Desktop/tmobile.png");
+    try{
+        cv::Mat mat;
+        mat = cv::imread("..//kep.jpg");
         cvNamedWindow("hello");
         cv::imshow("hello",mat);
 
         cvWaitKey(0);
+    }catch(cv::Exception e){
+        //e.msg();
+    }
+
     return 0;
 //Hello
     //return a.exec();

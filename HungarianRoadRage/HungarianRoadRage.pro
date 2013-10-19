@@ -13,15 +13,19 @@ TEMPLATE = app
 #
 # For Open CV and etc.
 #
-CONFIG += OSXMACHINE
+#CONFIG += OSXMACHINE
 
-OSXMACHINE {
-    INCLUDEPATH += /opt/local/include
-    LIBS += -L/opt/local/lib
+
+#OSXMACHINE {
+#    INCLUDEPATH += /opt/local/include
+#    LIBS += -L/opt/local/lib
+
+INCLUDEPATH += C://OpenCV//OpenCV_bin//install//include
+LIBS += C://OpenCV//OpenCV_bin//bin//*.dll
 
     #QMAKE_CXXFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
     #QMAKE_LFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
-}
+#}
 
 SOURCES += main.cpp\
         mainwindow.cpp\
