@@ -79,6 +79,8 @@ HEADERS  += mainwindow.h\
 
 FORMS    += mainwindow.ui
 
+OTHER_FILES += images/*
+
 # Megjegyzesek:
 # Amiket kikommenteltem az OS X konfigban, azok nem kellenek egyelore, windows-nal is szerkesszetek be
 # a *.dll helyett mindig azokat a LIB-eket csak, amik kellenek. Felesleges dolgokat ne forgassunk bele
