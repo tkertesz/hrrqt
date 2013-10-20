@@ -4,10 +4,6 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv/cv.h"
 
-/*Feli volt
-  Tibi volt
-*/
-
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -17,7 +13,7 @@ int main(int argc, char *argv[])
    // w.show();
     try{
         cv::Mat mat;
-        mat = cv::imread("..//kep.jpg");
+        mat = cv::imread("kep.jpg");
         cvNamedWindow("hello");
         cv::imshow("hello",mat);
 

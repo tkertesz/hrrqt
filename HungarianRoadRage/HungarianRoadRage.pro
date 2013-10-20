@@ -10,22 +10,24 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = HungarianRoadRage
 TEMPLATE = app
-#
-# For Open CV and etc.
-#
-#CONFIG += OSXMACHINE
 
+#OS X konfig
+mac:CONFIG += OSXMACHINE
 
-#OSXMACHINE {
-#    INCLUDEPATH += /opt/local/include
-#    LIBS += -L/opt/local/lib
+OSXMACHINE {
+    INCLUDEPATH += /opt/local/include
+    LIBS += -L/opt/local/lib
+   #QMAKE_CXXFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
+   #QMAKE_LFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
+}
 
-INCLUDEPATH += C://OpenCV//OpenCV_bin//install//include
-LIBS += C://OpenCV//OpenCV_bin//bin//*.dll
+#Windows konfig
+win32:CONFIG += WINDOWSMACHINE
 
-    #QMAKE_CXXFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
-    #QMAKE_LFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
-#}
+WINDOWSMACHINE{
+    INCLUDEPATH += C://OpenCV//OpenCV_bin//install//include
+    LIBS += C://OpenCV//OpenCV_bin//bin//*.dll
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp\
@@ -36,3 +38,6 @@ HEADERS  += mainwindow.h\
         Player.hpp
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    kep.jpg
