@@ -20,7 +20,7 @@ OSXMACHINE {
 
     #To copy images directory
     APP_IMAGE_FILES.files = images
-    APP_IMAGE_FILES.path = Contents/MacOS
+    APP_IMAGE_FILES.path = Contents/MacOS/debug
 
     QMAKE_BUNDLE_DATA += APP_IMAGE_FILES
 

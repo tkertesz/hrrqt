@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
    // MainWindow w;
    // w.show();
         cv::Mat image;
-        image = cv::imread("images/kep.png");
+        image = cv::imread("debug/images/kep.png");
         cvNamedWindow("hello");
         cv::imshow("hello",image);
 
