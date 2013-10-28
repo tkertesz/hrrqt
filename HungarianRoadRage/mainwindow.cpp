@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,16 +17,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
-    if (event ->key() == Qt::Key_Left) {
-        std::cout << "Left key pressed" << std::endl;
-        return;
-    }
-    else if (event->key() == Qt::Key_Right) {
-        std::cout << "Right key pressed" << std::endl;
-        return;
-    }
-    else if (event->key() == Qt::Key_Escape) {
-        std::cout << "Esc key pressed" << std::endl;
-        return;
+    switch (event->key())
+    {
+        case Qt::Key_Right:
+            std::cout << "Right key pressed" << std::endl;
+            break;
+
+        case Qt::Key_Left:
+            std::cout << "Left key pressed" << std::endl;
+            break;
+
+        case Qt::Key_Escape:
+            std::cout << "Esc key pressed" << std::endl;
+            break;
+
+        default:
+            break;
     }
 }

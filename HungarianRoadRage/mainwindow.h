@@ -18,6 +18,7 @@ public:
     ~MainWindow();
 
 protected:
+    //Handling the key press events
     void keyPressEvent(QKeyEvent *);
 
 private:
