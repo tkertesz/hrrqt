@@ -1,47 +1,44 @@
 #include "RaceRoad.hpp"
 
-RaceRoad::RaceRoad(){
+RaceRoad::RaceRoad()
+{
 	road=generateRoad(1);
-	hori=1;vert=0;life=10;
+    hori=1;
+    vert=0;
+    life=10;
 }
 
 void RaceRoad::play(){
-//	RaceRoad();
-//	represent();
-//	short direction;
-//	char ispressed(1);
+//    RaceRoad();
+//    represent();
+//    short direction;
+//    char ispressed(1);
 
-//	HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
-//    DWORD NumInputs = 0;
-//    DWORD InputsRead = 0;
 //    bool running = true;
-//    INPUT_RECORD irInput;
-//    GetNumberOfConsoleInputEvents(hInput, &NumInputs);
 //    while(running){
-//		direction=0;
-//        ReadConsoleInput(hInput, &irInput, 1, &InputsRead);
+//        direction=0;
 //        switch(irInput.Event.KeyEvent.wVirtualKeyCode){
 //            case VK_ESCAPE:
 //                running = false;
 //            break;
-//			case VK_LEFT:
-//			case VK_NUMPAD4:
-//				direction=-1;
-//				ispressed*=-1;
-//			break;
-//			case VK_RIGHT:
-//			case VK_NUMPAD6:
-//				direction=1;
-//				ispressed*=-1;
-//			break;
-//		}
-//		if(ispressed>0)moveCar(direction);
-//		if(isHit()){
-//			life--;
-//			cout<<"ELET: "<<life<<endl;
-//			//if(life<1)running=false;
-//		}
-//		represent();
+//            case VK_LEFT:
+//            case VK_NUMPAD4:
+//                direction=-1;
+//                ispressed*=-1;
+//            break;
+//            case VK_RIGHT:
+//            case VK_NUMPAD6:
+//                direction=1;
+//                ispressed*=-1;
+//            break;
+//        }
+//        if(ispressed>0)moveCar(direction);
+//        if(isHit()){
+//            life--;
+//            cout<<"ELET: "<<life<<endl;
+//            //if(life<1)running=false;
+//        }
+//        represent();
 //        sleep(1000);
 		
 //    }

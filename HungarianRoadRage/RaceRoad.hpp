@@ -9,7 +9,8 @@
 
 using namespace std;
 
-class RaceRoad{
+class RaceRoad
+{
     vector <vector<unsigned char> > road;
 	unsigned short vert;
 	unsigned short hori;
@@ -17,14 +18,13 @@ class RaceRoad{
 
 	bool isHit();
     vector <vector<unsigned char> > generateRoad(const int& difficulty);
-	void represent();
-	
-  public:
-	RaceRoad();
-	void play();
-	//void roadStep();
-	void moveCar(const short& direction);
-	
+    void represent();
+
+public:
+    RaceRoad();
+    void play();
+    //void roadStep();
+    void moveCar(const short& direction);
 };
 
 #endif // !RaceRoad
