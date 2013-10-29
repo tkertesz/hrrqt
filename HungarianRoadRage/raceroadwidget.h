@@ -2,6 +2,7 @@
 #define RACEROADWIDGET_H
 
 #include <QWidget>
+#include <QObject>
 #include <iostream>
 #include <vector>
 #include <list>

@@ -79,8 +79,9 @@ void RaceRoadWidget::timerEvent(QTimerEvent* event){
                 exit(0);
                 //Two ways to call the closeVideoStream:
                 //((MainWindow*)parentWidget())->closeVideoStream(); //not really good, but works
-                MainWindow *parent_window = qobject_cast<MainWindow*>(parent); //best way :)
+                MainWindow *parent_window = qobject_cast<MainWindow*>(parentWidget()); //best way :)
                 parent_window->closeVideoStream();
+
             }
         }
         represent();
