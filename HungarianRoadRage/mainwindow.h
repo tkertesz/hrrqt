@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void closeVideoStream();
     ~MainWindow();
 
 protected:

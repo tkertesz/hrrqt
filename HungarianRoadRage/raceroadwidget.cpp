@@ -1,6 +1,8 @@
 #include "raceroadwidget.h"
 #include "ui_raceroadwidget.h"
 
+#include "mainwindow.h"
+
 RaceRoadWidget::RaceRoadWidget(QWidget *parent) :
     QWidget(parent),
     vert(0), hori(1), life(10),
@@ -72,7 +74,14 @@ void RaceRoadWidget::timerEvent(QTimerEvent* event){
         if(isHit()){
             life--;
             std::cout<<"ELET: "<<life<<std::endl;
-            if(life<1)exit(0);
+            if(life<1)
+            {
+                exit(0);
+                //Two ways to call the closeVideoStream:
+                //((MainWindow*)parentWidget())->closeVideoStream(); //not really good, but works
+                MainWindow *parent_window = qobject_cast<MainWindow*>(parent); //best way :)
+                parent_window->closeVideoStream();
+            }
         }
         represent();
     } else {

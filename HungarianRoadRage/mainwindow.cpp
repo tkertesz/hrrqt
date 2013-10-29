@@ -42,6 +42,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+MainWindow::closeVideoStream()
+{
+    CaptureCamera.release();
+}
+
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     switch (event->key())
