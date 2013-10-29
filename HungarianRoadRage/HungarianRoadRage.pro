@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 cache();
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -75,7 +75,8 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h\
         RaceRoad.hpp\
-        Player.hpp
+        Player.hpp \
+    network.hpp
 
 FORMS    += mainwindow.ui
 

@@ -29,33 +29,38 @@ int main(int argc, char *argv[])
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
+#include "network.hpp"
 using namespace cv;
 using namespace std;
 
 int main() {
 
-Mat cameraFrame;
-VideoCapture stream1(0);   //0 is the id of video device.0 if you have only one camera.
+    Mat cameraFrame;
+    VideoCapture stream1(0);   //0 is the id of video device.0 if you have only one camera.
 
-if (!stream1.isOpened()) { //check if video device has been initialised
-cout << "cannot open camera";
-}
-cvNamedWindow("hello");
-//unconditional loop
-while (true) {
+    if (!stream1.isOpened()) { //check if video device has been initialised
+        cout << "cannot open camera";
+    }
+    cvNamedWindow("hello");
+    Network client;
+    Network server;
 
-stream1.read(cameraFrame);
-try
-{
-    cv::flip(cameraFrame, cameraFrame, 1);
-    imshow("hello", cameraFrame);
-}
-catch (Exception& e)
-{
-}
 
-if (waitKey(30) >= 0)
-break;
-}
-return 0;
+    //unconditional loop
+    while (true) {
+
+        stream1.read(cameraFrame);
+        try
+        {
+            cv::flip(cameraFrame, cameraFrame, 1);
+            server.sendData(cameraFrame);
+            imshow("hello", client.readyReady());
+        }
+        catch (Exception& e)
+        {
+        }
+        if (waitKey(30) >= 0)
+            break;
+    }
+    return 0;
 }
