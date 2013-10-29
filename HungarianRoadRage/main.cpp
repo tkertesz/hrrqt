@@ -45,14 +45,15 @@ int main(int argc, char *argv[])
 ////unconditional loop
 //while (true) {
 
-//stream1.read(cameraFrame);
-//try
-//{
-//    imshow("hello", cameraFrame);
-//}
-//catch (Exception& e)
-//{
-//}
+stream1.read(cameraFrame);
+try
+{
+    cv::flip(cameraFrame, cameraFrame, 1);
+    imshow("hello", cameraFrame);
+}
+catch (Exception& e)
+{
+}
 
 //if (waitKey(30) >= 0)
 //break;
