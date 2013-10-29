@@ -58,11 +58,11 @@ std::vector<std::vector<unsigned char> > RaceRoadWidget::generateRoad(const int&
 }
 
 bool RaceRoadWidget::isHit(){
-    if(vert<9){
-        vert+=1;
+    if(road.size()>9){
+        road.erase(road.begin());
     }else{
-        road=generateRoad(1);
-        vert=0;
+        std::vector<std::vector<unsigned char> > idVec = generateRoad(0);
+        road.insert(road.end(),idVec.begin(),idVec.end());
     }
     return '1'==road[vert][hori];
 }

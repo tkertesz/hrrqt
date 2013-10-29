@@ -71,11 +71,9 @@ WINDOWSMACHINE{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        RaceRoad.cpp \
     raceroadwidget.cpp
 
 HEADERS  += mainwindow.h\
-        RaceRoad.hpp\
     raceroadwidget.h
 
 FORMS    += mainwindow.ui \
