@@ -42,7 +42,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-MainWindow::closeVideoStream()
+void MainWindow::closeVideoStream()
 {
     CaptureCamera.release();
 }
