@@ -7,6 +7,7 @@
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
+#include <QBasicTimer>
 
 namespace Ui {
 class RaceRoadWidget;
@@ -15,6 +16,7 @@ class RaceRoadWidget;
 class RaceRoadWidget : public QWidget
 {
     Q_OBJECT
+    QBasicTimer timer;
     std::vector <std::vector<unsigned char> > road;
     unsigned short vert;
     unsigned short hori;
@@ -22,7 +24,9 @@ class RaceRoadWidget : public QWidget
 
     bool isHit();
     std::vector <std::vector<unsigned char> > generateRoad(const int& difficulty);
-    void represent();
+    Ui::RaceRoadWidget *ui;
+protected:
+    void timerEvent(QTimerEvent *event);
 
 public:
     explicit RaceRoadWidget(QWidget *parent = 0);
@@ -33,9 +37,8 @@ public:
     void play();
     //void roadStep();
     void moveCar(const short& direction);
+    void represent();
 
-private:
-    Ui::RaceRoadWidget *ui;// = new RaceRoadWidget();
 };
 
 #endif // RACEROADWIDGET_H

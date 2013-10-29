@@ -3,62 +3,18 @@
 
 RaceRoadWidget::RaceRoadWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::RaceRoadWidget),
-    vert(0), hori(1), life(10)
+    vert(0), hori(1), life(10),
+    ui(new Ui::RaceRoadWidget)
 {
     road=generateRoad(1);
     ui->setupUi(this);
+    timer.start(1000, this);
+    represent();
 }
 
 RaceRoadWidget::~RaceRoadWidget()
 {
     delete ui;
-}
-
-/*void RaceRoadWidget::turnLeft()
-{
-    std::cout << "RaceCar turned left" << std::endl;
-}
-
-void RaceRoadWidget::turnRight()
-{
-    std::cout << "RaceCar turned right" << std::endl;
-}*/
-
-void RaceRoadWidget::play(){
-//    RaceRoad();
-//    represent();
-//    short direction;
-//    char ispressed(1);
-
-//    bool running = true;
-//    while(running){
-//        direction=0;
-//        switch(irInput.Event.KeyEvent.wVirtualKeyCode){
-//            case VK_ESCAPE:
-//                running = false;
-//            break;
-//            case VK_LEFT:
-//            case VK_NUMPAD4:
-//                direction=-1;
-//                ispressed*=-1;
-//            break;
-//            case VK_RIGHT:
-//            case VK_NUMPAD6:
-//                direction=1;
-//                ispressed*=-1;
-//            break;
-//        }
-//        if(ispressed>0)moveCar(direction);
-//        if(isHit()){
-//            life--;
-//            cout<<"ELET: "<<life<<endl;
-//            //if(life<1)running=false;
-//        }
-//        represent();
-//        sleep(1000);
-
-//    }
 }
 
 void RaceRoadWidget::represent(){
@@ -102,11 +58,24 @@ std::vector<std::vector<unsigned char> > RaceRoadWidget::generateRoad(const int&
 }
 
 bool RaceRoadWidget::isHit(){
-    if(vert<9){
-        vert+=1;
+    if(road.size()>9){
+        road.erase(road.begin());
     }else{
-        road=generateRoad(1);
-        vert=0;
+        std::vector<std::vector<unsigned char> > idVec = generateRoad(0);
+        road.insert(road.end(),idVec.begin(),idVec.end());
     }
     return '1'==road[vert][hori];
+}
+
+void RaceRoadWidget::timerEvent(QTimerEvent* event){
+    if (event->timerId() == timer.timerId()) {
+        if(isHit()){
+            life--;
+            std::cout<<"ELET: "<<life<<std::endl;
+            if(life<1)exit(0);
+        }
+        represent();
+    } else {
+        QWidget::timerEvent(event);
+    }
 }
