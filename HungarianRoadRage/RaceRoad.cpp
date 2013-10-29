@@ -1,4 +1,4 @@
-#include "RaceRoad.hpp"
+/*#include "RaceRoad.hpp"
 
 RaceRoad::RaceRoad()
 {
@@ -92,4 +92,4 @@ bool RaceRoad::isHit(){
 		vert=0;
 	}
 	return '1'==road[vert][hori];
-}
+}*/

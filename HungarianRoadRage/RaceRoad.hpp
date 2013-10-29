@@ -1,6 +1,5 @@
-#ifndef RaceRoad
+/*#ifndef RaceRoad
 
-#include "Player.hpp"
 #include <vector>
 #include <list>
 #include <iostream>
@@ -28,3 +27,4 @@ public:
 };
 
 #endif // !RaceRoad
+*/

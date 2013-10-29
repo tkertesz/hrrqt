@@ -21,12 +21,12 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     {
         case Qt::Key_Right:
 //            std::cout << "Right key pressed" << std::endl;
-            ui->RaceField->turnRight();
+            ui->RaceField->moveCar(1); //turn right;
             break;
 
         case Qt::Key_Left:
 //            std::cout << "Left key pressed" << std::endl;
-            ui->RaceField->turnLeft();
+            ui->RaceField->moveCar(-1); //turn left;
             break;
 
         case Qt::Key_Escape:

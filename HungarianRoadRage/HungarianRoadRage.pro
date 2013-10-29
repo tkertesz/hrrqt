@@ -76,7 +76,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h\
         RaceRoad.hpp\
-        Player.hpp \
     raceroadwidget.h
 
 FORMS    += mainwindow.ui \
