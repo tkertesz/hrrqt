@@ -47,6 +47,7 @@ while (true) {
 stream1.read(cameraFrame);
 try
 {
+    cv::flip(cameraFrame, cameraFrame, 1);
     imshow("hello", cameraFrame);
 }
 catch (Exception& e)
