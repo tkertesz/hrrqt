@@ -27,7 +27,7 @@
      <string>MyCamVideo</string>
     </property>
    </widget>
-   <widget class="RaceRoadWidget" name="widget" native="true">
+   <widget class="RaceRoadWidget" name="RaceField" native="true">
     <property name="geometry">
      <rect>
       <x>160</x>

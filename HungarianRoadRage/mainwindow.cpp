@@ -20,15 +20,18 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     switch (event->key())
     {
         case Qt::Key_Right:
-            std::cout << "Right key pressed" << std::endl;
+//            std::cout << "Right key pressed" << std::endl;
+            ui->RaceField->turnRight();
             break;
 
         case Qt::Key_Left:
-            std::cout << "Left key pressed" << std::endl;
+//            std::cout << "Left key pressed" << std::endl;
+            ui->RaceField->turnLeft();
             break;
 
         case Qt::Key_Escape:
             std::cout << "Esc key pressed" << std::endl;
+            exit(0);
             break;
 
         default:
