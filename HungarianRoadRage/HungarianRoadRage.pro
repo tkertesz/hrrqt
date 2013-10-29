@@ -71,13 +71,16 @@ WINDOWSMACHINE{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-        RaceRoad.cpp
+        RaceRoad.cpp \
+    raceroadwidget.cpp
 
 HEADERS  += mainwindow.h\
         RaceRoad.hpp\
-        Player.hpp
+        Player.hpp \
+    raceroadwidget.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    raceroadwidget.ui
 
 OTHER_FILES += images/*
 
