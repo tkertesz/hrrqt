@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 
-
 namespace Ui {
 class MainWindow;
 }
