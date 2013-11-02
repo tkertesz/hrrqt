@@ -3,10 +3,7 @@
 
 #include "mainwindow.h"
 
-RaceRoadWidget::RaceRoadWidget(QWidget *parent) :
-    QWidget(parent),
-    vert(0), hori(1), life(10),
-    ui(new Ui::RaceRoadWidget)
+RaceRoadWidget::RaceRoadWidget(QWidget *parent):QWidget(parent), vert(0), hori(1), life(10), ui(new Ui::RaceRoadWidget)
 {
     road=generateRoad(1);
     ui->setupUi(this);
@@ -56,6 +53,7 @@ std::vector<std::vector<unsigned char> > RaceRoadWidget::generateRoad(const int&
         }
         idList.push_back(idVec);
     }
+    std::cout << "Road generated with difficulty: " << difficulty <<std::endl;
     return idList;
 }
 
@@ -76,11 +74,11 @@ void RaceRoadWidget::timerEvent(QTimerEvent* event){
             std::cout<<"ELET: "<<life<<std::endl;
             if(life<1)
             {
-                exit(0);
                 //Two ways to call the closeVideoStream:
                 //((MainWindow*)parentWidget())->closeVideoStream(); //not really good, but works
                 MainWindow *parent_window = qobject_cast<MainWindow*>(parentWidget()); //best way :)
                 parent_window->closeVideoStream();
+                exit(0);
 
             }
         }

@@ -71,10 +71,12 @@ WINDOWSMACHINE{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-    raceroadwidget.cpp
+    raceroadwidget.cpp \
+    imageprocesser.cpp
 
 HEADERS  += mainwindow.h\
-    raceroadwidget.h
+    raceroadwidget.h \
+    imageprocesser.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui

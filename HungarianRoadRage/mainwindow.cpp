@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -14,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->ErrorLabel->setText("Camera Error");
         std::cerr<< "Camera open error" <<std::endl;
     }
+
+    CamSize = OriginalImageMat.size();
+    Processer = new ImageProcesser(CamSize);
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
     ProcessTimer->start(50);
@@ -24,7 +25,15 @@ void MainWindow::processVideoAndUpdateQUI()
     CaptureCamera.read(OriginalImageMat);
 
     if (OriginalImageMat.empty()) return;
-    //Processing here :)
+
+    if(CamSize.height ==0 && CamSize.width == 0)
+    {
+        CamSize = OriginalImageMat.size();
+        Processer->setCamSize(CamSize);
+    }
+    int move = Processer->getMove(OriginalImageMat);
+    std::cout << "move: " << move <<std::endl;
+
     cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(240,150), 0, 0, cv::INTER_CUBIC);
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB);
     cv::flip(ResizedImageMat, ResizedImageMat, 1);
@@ -41,6 +50,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete ProcessTimer;
+    delete Processer;
 }
 
 void MainWindow::closeVideoStream()
