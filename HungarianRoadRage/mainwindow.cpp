@@ -40,6 +40,7 @@ void MainWindow::processVideoAndUpdateQUI()
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete ProcessTimer;
 }
 
 void MainWindow::closeVideoStream()
