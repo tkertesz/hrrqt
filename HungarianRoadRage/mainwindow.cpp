@@ -46,6 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::closeVideoStream()
 {
     CaptureCamera.release();
+    ProcessTimer->stop();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event)
