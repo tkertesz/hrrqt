@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
     ProcessTimer->start(50);
+    //Start the game
+    ui->RaceField->play();
 }
 
 void MainWindow::processVideoAndUpdateQUI()

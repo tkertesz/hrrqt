@@ -39,7 +39,6 @@ public:
     //void roadStep();
     void moveCar(const short& direction);
     void represent();
-
 };
 
 #endif // RACEROADWIDGET_H

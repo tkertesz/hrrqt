@@ -7,8 +7,6 @@ RaceRoadWidget::RaceRoadWidget(QWidget *parent):QWidget(parent), vert(0), hori(1
 {
     road=generateRoad(1);
     ui->setupUi(this);
-    timer.start(1000, this);
-    represent();
 }
 
 RaceRoadWidget::~RaceRoadWidget()
@@ -32,6 +30,7 @@ void RaceRoadWidget::represent(){
 }
 
 void RaceRoadWidget::moveCar(const short& direction){ //direction -1: bal, 1:jobb
+    if(direction == 0) return;
     if(direction<0){
         if(hori>0){
             hori+=-1;
@@ -86,4 +85,11 @@ void RaceRoadWidget::timerEvent(QTimerEvent* event){
     } else {
         QWidget::timerEvent(event);
     }
+}
+
+void RaceRoadWidget::play()
+{
+    timer.start(1000, this);
+    std::cerr << "Game started with this road:" <<std::endl;
+    represent();
 }
