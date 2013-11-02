@@ -44,6 +44,7 @@ void MainWindow::processVideoAndUpdateQUI()
                          QImage::Format_RGB888);
 
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
+    ui->RaceField->moveCar(move);
 }
 
 MainWindow::~MainWindow()
@@ -77,6 +78,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 
         case Qt::Key_Escape:
             //std::cout << "Esc key pressed" << std::endl;
+            closeVideoStream();
             exit(0);
             break;
 
