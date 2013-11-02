@@ -45,8 +45,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeVideoStream()
 {
-    CaptureCamera.release();
     ProcessTimer->stop();
+    std::cout << "Video process timer stopped" <<std::endl;
+    CaptureCamera.release();
+    std::cout << "Camera released" <<std::endl;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event)
