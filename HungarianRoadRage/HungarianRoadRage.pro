@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 cache();
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -72,11 +72,13 @@ WINDOWSMACHINE{
 SOURCES += main.cpp\
         mainwindow.cpp\
     raceroadwidget.cpp \
-    imageprocesser.cpp
+    imageprocesser.cpp \
+    network.cpp
 
 HEADERS  += mainwindow.h\
     raceroadwidget.h \
-    imageprocesser.h
+    imageprocesser.h \
+    network.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui
