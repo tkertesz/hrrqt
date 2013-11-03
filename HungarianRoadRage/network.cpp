@@ -31,4 +31,5 @@ QImage Network::readyRead()
         QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
         return recv_image;
    }
+    return QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
 }
