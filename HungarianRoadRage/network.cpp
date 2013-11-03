@@ -5,7 +5,7 @@ Network::Network(QObject *parent) :QObject(parent)
     my_socket = new QUdpSocket(this);
     my_socket->bind(QHostAddress::LocalHost, 1337);
     connect(my_socket, SIGNAL(readyRead()),
-            this, SLOT(readPendingDatagrams()));
+            this, SLOT(readyRead()));
 };
 
 void Network::sendData(QImage image)
@@ -17,7 +17,7 @@ void Network::sendData(QImage image)
     my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
 };
 
-QImage Network::readPendingDatagrams()
+QImage Network::readyRead()
 {
 
     while (my_socket->hasPendingDatagrams()) {
@@ -28,7 +28,7 @@ QImage Network::readPendingDatagrams()
 
         my_socket->readDatagram(datagram.data(), datagram.size(),
                                 &sender, &senderPort);
-        QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB16);
+        QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
         return recv_image;
    }
 };

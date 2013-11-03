@@ -48,7 +48,7 @@ void MainWindow::processVideoAndUpdateQUI()
     Network n;
     n.sendData(OriginalImage);
 
-    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(n.readPendingDatagrams()));
+    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(n.readyRead()));
     ui->RaceField->moveCar(move);
 }
 

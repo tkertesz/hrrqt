@@ -14,11 +14,11 @@ class Network : public QObject
 public:
     explicit Network(QObject *parent = 0);
     void sendData(QImage image);
-    QImage readPendingDatagrams();
+    //QImage readPendingDatagrams();
 signals:
 
 public slots:
-    //QImage readyReady();
+    QImage readyRead();
 private:
     QUdpSocket *my_socket;
 };
