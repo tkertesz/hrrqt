@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <QBasicTimer>
+#include <mainwindow.h>
 
 namespace Ui {
 class RaceRoadWidget;
@@ -26,6 +27,8 @@ class RaceRoadWidget : public QWidget
     bool isHit();
     std::vector <std::vector<unsigned char> > generateRoad(const int& difficulty);
     Ui::RaceRoadWidget *ui;
+    MainWindow *parent_window;
+
 protected:
     void timerEvent(QTimerEvent *event);
 
