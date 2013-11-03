@@ -8,6 +8,7 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "imageprocesser.h"
+#include "network.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,7 @@ private:
     QTimer* ProcessTimer;
 
     ImageProcesser* Processer;
+    Network n;
 
 public slots:
     void processVideoAndUpdateQUI();

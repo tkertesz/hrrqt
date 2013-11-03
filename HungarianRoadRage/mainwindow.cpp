@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "network.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -20,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
     ProcessTimer->start(50);
     //Start the game
-    ui->RaceField->play();
+    //ui->RaceField->play();
 }
 
 void MainWindow::processVideoAndUpdateQUI()
@@ -45,10 +44,10 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.rows,
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
-    Network n;
-    n.sendData(OriginalImage);
 
-    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(n.readyRead()));
+    n.sendData(OriginalImage);
+    QImage NetImage = n.readyRead();
+    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(NetImage));
     ui->RaceField->moveCar(move);
 }
 
