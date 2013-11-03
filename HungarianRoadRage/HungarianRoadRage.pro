@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HungarianRoadRage
 TEMPLATE = app
 
+CONFIG += c++11
+
 #OS X config
 macx:CONFIG += OSXMACHINE
 
@@ -46,8 +48,8 @@ OSXMACHINE {
         #-lopencv_superres \
         #-lopencv_ts
 
-   #QMAKE_CXXFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
-   #QMAKE_LFLAGS = -std=c++11 -stdlib=libstdc++ -mmacosx-version-min=10.7
+    QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7
+    LIBS += -stdlib=libc++ -mmacosx-version-min=10.7
 }
 
 #Windows config

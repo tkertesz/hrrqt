@@ -6,6 +6,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     ui->ErrorLabel->setText("No error :)");
+
+    foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
+    {
+        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
+             MyIpAddr = address.toString();
+    }
+    ui->MyIP->setText("My ip: " + MyIpAddr);
+
     CaptureCamera.open(0);
     if(CaptureCamera.isOpened() == false)
     {

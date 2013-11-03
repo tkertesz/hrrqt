@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QNetworkInterface>
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "imageprocesser.h"
@@ -43,6 +44,8 @@ private:
 
     ImageProcesser* Processer;
     Network* n;
+
+    QString MyIpAddr;
 
 public slots:
     void processVideoAndUpdateQUI();
