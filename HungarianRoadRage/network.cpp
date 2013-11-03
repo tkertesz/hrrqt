@@ -13,11 +13,11 @@ void Network::sendData(QImage image)
     QByteArray q;
     QBuffer buffer(&q);
     buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "PNG");
+    image.save(&buffer);
     my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
 };
 
-cv::Mat Network::readyReady()
+QImage Network::readPendingDatagrams()
 {
 
     while (my_socket->hasPendingDatagrams()) {
@@ -28,7 +28,7 @@ cv::Mat Network::readyReady()
 
         my_socket->readDatagram(datagram.data(), datagram.size(),
                                 &sender, &senderPort);
-        cv::Mat recvImg = cv::Mat(400, 300, CV_8UC3, &datagram);
-        return recvImg;
+        QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB16);
+        return recv_image;
    }
 };

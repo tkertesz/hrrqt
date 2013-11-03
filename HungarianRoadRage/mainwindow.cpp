@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "network.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -44,8 +45,10 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.rows,
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
+    Network n;
+    n.sendData(OriginalImage);
 
-    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
+    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(n.readPendingDatagrams()));
     ui->RaceField->moveCar(move);
 }
 
