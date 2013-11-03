@@ -6,7 +6,7 @@ Network::Network(QObject *parent) :QObject(parent)
     my_socket->bind(QHostAddress::LocalHost, 1337);
     connect(my_socket, SIGNAL(readyRead()),
             this, SLOT(readyRead()));
-};
+}
 
 void Network::sendData(QImage image)
 {
@@ -15,7 +15,7 @@ void Network::sendData(QImage image)
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer);
     my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
-};
+}
 
 QImage Network::readyRead()
 {
@@ -31,4 +31,4 @@ QImage Network::readyRead()
         QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
         return recv_image;
    }
-};
+}

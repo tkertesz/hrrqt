@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->ErrorLabel->setText("Camera Error");
         std::cerr<< "Camera open error" <<std::endl;
     }
+    n = new Network();
 
     CamSize = OriginalImageMat.size();
     Processer = new ImageProcesser(CamSize);
@@ -45,8 +46,8 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
 
-    n.sendData(OriginalImage);
-    QImage NetImage = n.readyRead();
+    n->sendData(OriginalImage);
+    QImage NetImage = n->readyRead();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(NetImage));
     ui->RaceField->moveCar(move);
 }
@@ -56,6 +57,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete ProcessTimer;
     delete Processer;
+    delete n;
 }
 
 void MainWindow::closeVideoStream()

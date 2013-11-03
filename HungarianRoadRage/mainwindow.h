@@ -42,7 +42,7 @@ private:
     QTimer* ProcessTimer;
 
     ImageProcesser* Processer;
-    Network n;
+    Network* n;
 
 public slots:
     void processVideoAndUpdateQUI();
