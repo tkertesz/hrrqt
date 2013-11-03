@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 //    delete testRoad;
 //    return 0;
     a.exec();
+    return 0;
 }
 
 //#include <opencv2/highgui/highgui.hpp>
