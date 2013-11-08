@@ -54,7 +54,9 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
 
-    n->sendData(QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150));
+    //QImage debug = QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
+
+    n->sendData(OriginalImage);
     NetworkImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));

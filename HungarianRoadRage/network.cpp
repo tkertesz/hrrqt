@@ -1,4 +1,5 @@
 #include "network.h"
+#include <QDebug>
 
 Network::Network(QObject *parent) :QObject(parent)
 {
@@ -28,7 +29,12 @@ void Network::processPendingDatagram()
 
         my_socket->readDatagram(datagram.data(), datagram.size(),
                                 &sender, &senderPort);
-        QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
+        //QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
+        QImage recv_image;
+        recv_image.loadFromData(datagram, "PNG");
+
+        if (recv_image.isNull())		      // Check if the image was indeed received
+                qDebug("The image is null. Something failed.");
         image = recv_image;
    }
     //image = QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
