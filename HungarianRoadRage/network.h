@@ -20,6 +20,7 @@ public slots:
     void processPendingDatagram();
     QImage get_image();
 private:
+    ~Network();
     QUdpSocket *my_socket;
     QImage image;
 };

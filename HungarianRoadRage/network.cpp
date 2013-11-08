@@ -38,3 +38,8 @@ QImage Network::get_image()
 {
     return image;
 }
+
+Network::~Network()
+{
+    delete my_socket;
+}
