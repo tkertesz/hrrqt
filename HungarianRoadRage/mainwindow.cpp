@@ -54,8 +54,8 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
 
-    n->sendData(OriginalImage);
-    NetworkImage = n->readyRead();
+    n->sendData(QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150));
+    NetworkImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
     ui->RaceField->moveCar(move);
