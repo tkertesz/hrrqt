@@ -55,8 +55,9 @@ void MainWindow::processVideoAndUpdateQUI()
                          QImage::Format_RGB888);
 
     n->sendData(OriginalImage);
-    QImage NetImage = n->readyRead();
-    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(NetImage));
+    NetworkImage = n->readyRead();
+    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
     ui->RaceField->moveCar(move);
 }
 

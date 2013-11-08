@@ -39,6 +39,7 @@ private:
 
     QImage OriginalImage;
     QImage ProcessedImage;
+    QImage NetworkImage;
 
     QTimer* ProcessTimer;
 
