@@ -20,7 +20,13 @@ class ImageProcesser
 private:
     cv::Size SizeOfCamera;
     cv::Mat HSVImage;
+    cv::Mat OutImage;
+    cv::Mat threshold;
+
     DebugWindow DebugWin;
+
+    const cv::Scalar hsv_min = cvScalar(0, 50, 170, 0);
+    const cv::Scalar hsv_max = cvScalar(10, 180, 256, 0);
 
 public:
     ImageProcesser(cv::Size camsize);
