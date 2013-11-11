@@ -32,21 +32,21 @@ OSXMACHINE {
         -lopencv_core \
         -lopencv_highgui \
         -lopencv_imgproc \
-        #-lopencv_objdetect \
-        #-lopencv_contrib \
-        #-lopencv_calib3d \
-        #-lopencv_features2d \
-        #-lopencv_flann \
-        #-lopencv_gpu \
-        #-lopencv_legacy \
-        #-lopencv_nonfree \
-        #-lopencv_ml \
-        #-lopencv_photo \
-        #-lopencv_video \
-        #-lopencv_videostab \
-        #-lopencv_stitching \
-        #-lopencv_superres \
-        #-lopencv_ts
+#        -lopencv_objdetect \
+#        -lopencv_contrib \
+#        -lopencv_calib3d \
+#        -lopencv_features2d \
+#        -lopencv_flann \
+#        -lopencv_gpu \
+#        -lopencv_legacy \
+#        -lopencv_nonfree \
+#        -lopencv_ml \
+#        -lopencv_photo \
+#        -lopencv_video \
+#        -lopencv_videostab \
+#        -lopencv_stitching \
+#        -lopencv_superres \
+#        -lopencv_ts
 
     QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7
     LIBS += -stdlib=libc++ -mmacosx-version-min=10.7
@@ -75,15 +75,18 @@ SOURCES += main.cpp\
         mainwindow.cpp\
     raceroadwidget.cpp \
     imageprocesser.cpp \
-    network.cpp
+    network.cpp \
+    debugwindow.cpp
 
 HEADERS  += mainwindow.h\
     raceroadwidget.h \
     imageprocesser.h \
-    network.h
+    network.h \
+    debugwindow.h
 
 FORMS    += mainwindow.ui \
-    raceroadwidget.ui
+    raceroadwidget.ui \
+    debugwindow.ui
 
 OTHER_FILES += images/*
 
