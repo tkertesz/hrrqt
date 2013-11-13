@@ -48,9 +48,9 @@
    <widget class="RaceRoadWidget" name="RaceField" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>220</y>
-      <width>491</width>
+      <x>80</x>
+      <y>140</y>
+      <width>661</width>
       <height>341</height>
      </rect>
     </property>
@@ -112,6 +112,12 @@
      <string>NetworkCamVideo</string>
     </property>
    </widget>
+   <zorder>MyVideoLabel</zorder>
+   <zorder>RaceField</zorder>
+   <zorder>ErrorLabel</zorder>
+   <zorder>MyIP</zorder>
+   <zorder>NetworkCamVideo</zorder>
+   <zorder>graphicsView</zorder>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -128,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>849</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="nativeMenuBar">

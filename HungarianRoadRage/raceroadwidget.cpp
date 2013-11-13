@@ -3,7 +3,10 @@
 
 #include "mainwindow.h"
 
-RaceRoadWidget::RaceRoadWidget(QWidget *parent):QWidget(parent), vert(0), hori(1), life(10), ui(new Ui::RaceRoadWidget)
+RaceRoadWidget::RaceRoadWidget(QWidget *parent) :
+    QWidget(parent),
+    CarVCord(0), CarHCord(1), life(10),
+    ui(new Ui::RaceRoadWidget)
 {
     road=generateRoad(1);
     ui->setupUi(this);
@@ -18,11 +21,13 @@ RaceRoadWidget::~RaceRoadWidget()
     delete parent_window;
 }
 
+
+//Végigmegy a road vektoron és a kocsi helyére A-t ír, egyébként meg az adott értéket.
 void RaceRoadWidget::represent(){
-    std::cout<<std::endl;
-    for(unsigned short i(9);i<=9;i--){
+    //std::cout<<std::endl;
+    for(unsigned short i(ROAD_SIZE-1);i<ROAD_SIZE;i--){
         for(short j(0);j<3;j++){
-            if(j==hori && i==vert){
+            if(j==CarHCord && i==CarVCord){
                 std::cout << 'A';
             }else{
                 std::cout << road[i][j];
@@ -33,22 +38,23 @@ void RaceRoadWidget::represent(){
     std::cout<<std::endl;
 }
 
-void RaceRoadWidget::moveCar(const short& direction){ //direction -1: bal, 1:jobb
-    if(direction == 0) return;
+//megváltoztatja a carHCord-ot, ha még benn van a pályán
+void RaceRoadWidget::moveCar(const short& direction){ //direction -1: bal, 1:jobb   
     if(direction<0){
-        if(hori>0){
-            hori+=-1;
+        if(CarHCord>0){
+            CarHCord+=-1;
         }
     }else{
-        if(hori<2){
-            hori+=1;
+        if(CarHCord<2){
+            CarHCord+=1;
         }
     }
 }
 
+//véletlen számokkal generál ROAD_SIZE-méretű utat
 std::vector<std::vector<unsigned char> > RaceRoadWidget::generateRoad(const int& difficulty){
     std::vector<std::vector<unsigned char> > idList;
-    for(int i(0);i<10;i++){
+    for(unsigned int i(0);i<ROAD_SIZE;i++){
         std::vector<unsigned char> idVec;
         for(int j(0);j<3;j++){
             if(rand()%100<30) idVec.push_back('1');
@@ -60,16 +66,20 @@ std::vector<std::vector<unsigned char> > RaceRoadWidget::generateRoad(const int&
     return idList;
 }
 
+// Ha a road vektor elég nagy kitörli az első sort, egyébként generál a végére hosszabbítást.
+// Visszatér igazzal, ha az autó épp egyesen áll
 bool RaceRoadWidget::isHit(){
-    if(road.size()>9){
+    if(road.size()>ROAD_SIZE){
         road.erase(road.begin());
     }else{
         std::vector<std::vector<unsigned char> > idVec = generateRoad(0);
         road.insert(road.end(),idVec.begin(),idVec.end());
+        road.erase(road.begin());
     }
-    return '1'==road[vert][hori];
+    return '1'==road[CarVCord][CarHCord];
 }
 
+//Meghívja az isHit-et és a represent-et, megvizsgálja, hogy nem fogyott-e le az élet.
 void RaceRoadWidget::timerEvent(QTimerEvent* event){
     if (event->timerId() == timer.timerId()) {
         if(isHit()){
@@ -89,6 +99,7 @@ void RaceRoadWidget::timerEvent(QTimerEvent* event){
     }
 }
 
+//Elindítja a timer-t.
 void RaceRoadWidget::play()
 {
     timer.start(1000, this);

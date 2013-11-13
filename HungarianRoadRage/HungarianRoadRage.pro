@@ -76,13 +76,15 @@ SOURCES += main.cpp\
     raceroadwidget.cpp \
     imageprocesser.cpp \
     network.cpp \
-    debugwindow.cpp
+    debugwindow.cpp \
+    road.cpp
 
 HEADERS  += mainwindow.h\
     raceroadwidget.h \
     imageprocesser.h \
     network.h \
-    debugwindow.h
+    debugwindow.h \
+    road.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \

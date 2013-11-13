@@ -17,12 +17,14 @@ class RaceRoadWidget;
 
 class RaceRoadWidget : public QWidget
 {
+    const unsigned int ROAD_SIZE=5;
+
     Q_OBJECT
     QBasicTimer timer;
     std::vector <std::vector<unsigned char> > road;
-    unsigned short vert;
-    unsigned short hori;
-    unsigned short life;
+    unsigned short CarVCord;    // Autó függőleges koordinátája (0)
+    unsigned short CarHCord;    // Autó vízszintes koordinátája (0,1,2)
+    unsigned short life;        // Életek száma
 
     bool isHit();
     std::vector <std::vector<unsigned char> > generateRoad(const int& difficulty);

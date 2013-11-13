@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->ErrorLabel->setText("No error :)");
 
-    foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
+    /*foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
     {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
              MyIpAddr = address.toString();
@@ -26,14 +26,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     Processer = new ImageProcesser(CamSize);
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
-    ProcessTimer->start(50);
-    //Start the game
-    //ui->RaceField->play();
+    ProcessTimer->start(50);*/
+
+    ///Start the game
+    ui->RaceField->play();
 }
 
 void MainWindow::processVideoAndUpdateQUI()
 {
-    CaptureCamera.read(OriginalImageMat);
+    /*CaptureCamera.read(OriginalImageMat);
 
     if (OriginalImageMat.empty()) return;
 
@@ -59,8 +60,10 @@ void MainWindow::processVideoAndUpdateQUI()
     n->sendData(OriginalImage);
     NetworkImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
-    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
-    ui->RaceField->moveCar(move);
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));*/
+
+    ///Move car
+    //ui->RaceField->moveCar(move);
 }
 
 MainWindow::~MainWindow()
