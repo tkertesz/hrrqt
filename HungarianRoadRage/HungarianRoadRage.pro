@@ -86,7 +86,8 @@ HEADERS  += mainwindow.h\
     network.h \
     debugwindow.h \
     road.h \
-    car.h
+    car.h \
+    settings.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \

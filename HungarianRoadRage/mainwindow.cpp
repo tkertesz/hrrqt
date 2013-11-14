@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer->start(50);
 
     ///Add the graphics to graphicsview
-    scene = new QGraphicsScene(0,0,Road::ROAD_WIDTH,Road::SCREEN_HEIGHT,ui->graphicsView);
+    scene = new QGraphicsScene(0,0,Settings::ROAD_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myCar = new Car;
     myRoad = new Road(myCar);
@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ///Start the game
     myRoad->setFocus();
     timer.start(1000,this);
-    timer2.start(50,this);
+    timer2.start(30,this);
 }
 
 void MainWindow::processVideoAndUpdateQUI()
