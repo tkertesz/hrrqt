@@ -39,7 +39,7 @@ void RaceRoadWidget::represent(){
 }
 
 //megváltoztatja a carHCord-ot, ha még benn van a pályán
-void RaceRoadWidget::moveCar(const short& direction){ //direction -1: bal, 1:jobb   
+void RaceRoadWidget::moveCar(const short& direction){ //direction -1: bal, 1:jobb
     if(direction<0){
         if(CarHCord>0){
             CarHCord+=-1;

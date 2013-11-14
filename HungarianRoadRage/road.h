@@ -24,7 +24,6 @@ class Road : public QGraphicsItem
     std::vector <std::vector<unsigned char> > generateRoad(const int& difficulty);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *event);
     void timerEvent(QTimerEvent *event);
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
     QRectF boundingRect() const;

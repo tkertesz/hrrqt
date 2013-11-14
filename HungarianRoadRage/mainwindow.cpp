@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
     ProcessTimer->start(50);
 
-    ///Add the graphics to graphicsview
+    //Add the graphics to graphicsview
     scene = new QGraphicsScene(0,0,Road::ROAD_WIDTH,Road::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myCar = new Car;
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene->addItem(myRoad);
     scene->addItem(myCar);
 
-    ///Start the game
+    //Start the game
     myRoad->setFocus();
     timer.start(1000,this);
     timer2.start(50,this);
@@ -48,7 +48,7 @@ void MainWindow::processVideoAndUpdateQUI()
 
     if (OriginalImageMat.empty()) return;
 
-    if(CamSize.height ==0 && CamSize.width == 0)
+    if(CamSize.height == 0)
     {
         CamSize = OriginalImageMat.size();
         Processer->setCamSize(CamSize);
@@ -72,7 +72,7 @@ void MainWindow::processVideoAndUpdateQUI()
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
 
-    ///Move car
+    //Move car
     //myRoad->moveCar(move);
 }
 
@@ -82,6 +82,9 @@ MainWindow::~MainWindow()
     delete ProcessTimer;
     delete Processer;
     delete n;
+    delete scene;
+    delete myCar;
+    delete myRoad;
 }
 
 void MainWindow::closeVideoStream()
@@ -92,7 +95,8 @@ void MainWindow::closeVideoStream()
     std::cout << "Camera released" <<std::endl;
 }
 
-void MainWindow::timerEvent(QTimerEvent* event){
+void MainWindow::timerEvent(QTimerEvent* event)
+{
     if (event->timerId() == timer.timerId()) {
         if(myRoad->isHit()){
             if(myRoad->decreaseLife()<1)
@@ -108,5 +112,25 @@ void MainWindow::timerEvent(QTimerEvent* event){
         myRoad->represent();
     }else{
         QWidget::timerEvent(event);
+    }
+}
+
+// Kezeli a billentyűlenyomást
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    switch (event->key())
+    {
+        case Qt::Key_Right:
+                myRoad->moveCar(1); //turn right;
+            break;
+        case Qt::Key_Left:
+                myRoad->moveCar(-1); //turn left;
+            break;
+        case Qt::Key_Escape:
+            closeVideoStream();
+            close();
+            exit(0);
+            break;
+        default:
+            break;
     }
 }

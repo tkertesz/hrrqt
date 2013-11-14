@@ -72,7 +72,7 @@ std::vector<std::vector<unsigned char> > Road::generateRoad(const int& difficult
         }
         idList.push_back(idVec);
     }
-    //std::cout << "Road generated with difficulty: " << difficulty <<std::endl;
+    std::cout << "Road generated with difficulty: " << difficulty <<std::endl;
     return idList;
 }
 
@@ -87,24 +87,6 @@ bool Road::isHit(){
         road.erase(road.begin());
     }
     return '1'==road[carVCord][carHCord];
-}
-
-// Kezeli a billentyűlenyomást
-void Road::keyPressEvent(QKeyEvent *event){
-    switch (event->key())
-    {
-        case Qt::Key_Right:
-                moveCar(1); //turn right;
-            break;
-        case Qt::Key_Left:
-                moveCar(-1); //turn left;
-            break;
-        case Qt::Key_Escape:
-            exit(0);
-            break;
-        default:
-            break;
-    }
 }
 
 //Lecsökkenti az életet egyel, visszaadja a megmaradt életek számát
