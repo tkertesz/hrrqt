@@ -44,7 +44,7 @@ OSXMACHINE {
 #        -lopencv_nonfree \
 #        -lopencv_ml \
 #        -lopencv_photo \
-#        -lopencv_video \
+        -lopencv_video \
 #        -lopencv_videostab \
 #        -lopencv_stitching \
 #        -lopencv_superres \

@@ -2,12 +2,14 @@
 #define IMAGEPROCESSER_H
 
 #include <iostream>
+#include <algorithm>
 #include "debugwindow.h"
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv/cv.h"
+#include "opencv2/video/video.hpp"
 
 /*
  *ImageProcesser class for processing the captured video from the wabcamera to controll the car's behaviour.
@@ -22,6 +24,8 @@ private:
     cv::Mat HSVImage;
     cv::Mat OutImage;
     cv::Mat threshold;
+
+    cv::BackgroundSubtractorMOG2 BackGroundSubtractor;
 
     DebugWindow DebugWin;
 
