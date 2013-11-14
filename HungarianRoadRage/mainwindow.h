@@ -10,6 +10,9 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "imageprocesser.h"
 #include "network.h"
+#include <QGraphicsScene>
+#include "car.h"
+#include "road.h"
 
 namespace Ui {
     class MainWindow;
@@ -26,7 +29,8 @@ public:
 
 protected:
     //Handling the key press events
-    void keyPressEvent(QKeyEvent *);
+    //void keyPressEvent(QKeyEvent *);
+    void timerEvent(QTimerEvent *event);
 
 private:
     Ui::MainWindow *ui;
@@ -42,11 +46,17 @@ private:
     QImage NetworkImage;
 
     QTimer* ProcessTimer;
+    QBasicTimer timer;
+    QBasicTimer timer2;
 
     ImageProcesser* Processer;
     Network* n;
 
     QString MyIpAddr;
+
+    QGraphicsScene *scene;
+    Car* myCar;
+    Road* myRoad;
 
 public slots:
     void processVideoAndUpdateQUI();

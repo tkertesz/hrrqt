@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->ErrorLabel->setText("No error :)");
 
-    /*foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
+    foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
     {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
              MyIpAddr = address.toString();
@@ -26,15 +26,25 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     Processer = new ImageProcesser(CamSize);
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
-    ProcessTimer->start(50);*/
+    ProcessTimer->start(50);
+
+    ///Add the graphics to graphicsview
+    scene = new QGraphicsScene(0,0,Road::ROAD_WIDTH,Road::SCREEN_HEIGHT,ui->graphicsView);
+    ui->graphicsView->setScene(scene);
+    myCar = new Car;
+    myRoad = new Road(myCar);
+    scene->addItem(myRoad);
+    scene->addItem(myCar);
 
     ///Start the game
-    ui->RaceField->play();
+    myRoad->setFocus();
+    timer.start(1000,this);
+    timer2.start(50,this);
 }
 
 void MainWindow::processVideoAndUpdateQUI()
 {
-    /*CaptureCamera.read(OriginalImageMat);
+    CaptureCamera.read(OriginalImageMat);
 
     if (OriginalImageMat.empty()) return;
 
@@ -60,10 +70,10 @@ void MainWindow::processVideoAndUpdateQUI()
     n->sendData(OriginalImage);
     NetworkImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
-    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));*/
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
 
     ///Move car
-    //ui->RaceField->moveCar(move);
+    //myRoad->moveCar(move);
 }
 
 MainWindow::~MainWindow()
@@ -82,27 +92,21 @@ void MainWindow::closeVideoStream()
     std::cout << "Camera released" <<std::endl;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent* event)
-{
-    switch (event->key())
-    {
-        case Qt::Key_Right:
-            //std::cout << "Right key pressed" << std::endl;
-                ui->RaceField->moveCar(1); //turn right;
-            break;
-
-        case Qt::Key_Left:
-            //std::cout << "Left key pressed" << std::endl;
-                ui->RaceField->moveCar(-1); //turn left;
-            break;
-
-        case Qt::Key_Escape:
-            //std::cout << "Esc key pressed" << std::endl;
-            closeVideoStream();
-            exit(0);
-            break;
-
-        default:
-            break;
+void MainWindow::timerEvent(QTimerEvent* event){
+    if (event->timerId() == timer.timerId()) {
+        if(myRoad->isHit()){
+            if(myRoad->decreaseLife()<1)
+            {
+                closeVideoStream();
+                close();
+                exit(0);
+            }
+        }
+        myRoad->represent();
+    } else if(event->timerId() == timer2.timerId()){
+        myRoad->roadStep();
+        myRoad->represent();
+    }else{
+        QWidget::timerEvent(event);
     }
 }

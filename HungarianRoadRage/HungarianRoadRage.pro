@@ -77,14 +77,16 @@ SOURCES += main.cpp\
     imageprocesser.cpp \
     network.cpp \
     debugwindow.cpp \
-    road.cpp
+    road.cpp \
+    car.cpp
 
 HEADERS  += mainwindow.h\
     raceroadwidget.h \
     imageprocesser.h \
     network.h \
     debugwindow.h \
-    road.h
+    road.h \
+    car.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \
