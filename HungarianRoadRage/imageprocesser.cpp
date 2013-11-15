@@ -5,8 +5,8 @@ ImageProcesser::ImageProcesser(cv::Size camsize)
     SizeOfCamera = camsize;
     std::cout << "Camera size set to:\n"<< "Height: " << SizeOfCamera.height << ", Width: " << SizeOfCamera.width <<std::endl;
     DebugWin.show();
-    BackGroundSubtractor.nmixtures = 3;
-    BackGroundSubtractor.bShadowDetection = false;
+//    BackGroundSubtractor.nmixtures = 3;
+//    BackGroundSubtractor.bShadowDetection = false;
 }
 
 void ImageProcesser::setCamSize(cv::Size camsize)

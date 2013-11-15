@@ -90,27 +90,6 @@ bool Road::isHit(){
     return '1'==road[carVCord][carHCord];
 }
 
-<<<<<<< HEAD
-// Kezeli a billentyűlenyomást
-void Road::keyPressEvent(QKeyEvent *event){
-    switch (event->key())
-    {
-        case Qt::Key_Right:
-                moveCar(1); //turn right;
-            break;
-        case Qt::Key_Left:
-                moveCar(-1); //turn left;
-            break;
-        /*case Qt::Key_Escape:
-                exit(0);
-            break;*/
-        default:
-            break;
-    }
-}
-
-=======
->>>>>>> origin/master
 //Lecsökkenti az életet egyel, visszaadja a megmaradt életek számát
 unsigned short Road::decreaseLife(){
     std::cout<<"ELET: "<<life<<std::endl;
