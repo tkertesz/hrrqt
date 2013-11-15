@@ -14,7 +14,7 @@ void Network::sendData(QImage image)
     QByteArray q;
     QBuffer buffer(&q);
     buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer);
+    image.save(&buffer, "PNG");
     my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
 }
 
@@ -31,6 +31,10 @@ void Network::processPendingDatagram()
                                 &sender, &senderPort);
         //QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
         QImage recv_image;
+        if (datagram.isNull())
+            qDebug("Ures a bejovo buzi!!");
+        else
+            qDebug("datagram nem ures");
         recv_image.loadFromData(datagram, "PNG");
 
         if (recv_image.isNull())		      // Check if the image was indeed received
