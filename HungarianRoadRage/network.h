@@ -6,6 +6,7 @@
 #include <QBuffer>
 #include <QObject>
 #include <iostream>
+#include "debugwindow.h"
 
 class Network : public QObject
 {
@@ -22,6 +23,7 @@ public slots:
 private:
     QUdpSocket *my_socket;
     QImage image;
+    DebugWindow NetworkDebugWin;
 };
 
 #endif // NETWORK_H

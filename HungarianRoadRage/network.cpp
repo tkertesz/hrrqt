@@ -9,6 +9,7 @@ Network::Network(QObject *parent) :QObject(parent)
     else
         qDebug("Bind problem");
     //my_socket->bind(QHostAddress("192.168.254.108"), 1337);
+    NetworkDebugWin.show();
 }
 
 void Network::sendData(QImage image)
@@ -43,7 +44,9 @@ void Network::processPendingDatagram()
         if (recv_image.isNull())		      // Check if the image was indeed received
                 qDebug("The image is null. Something failed.");
         image = recv_image;
+        NetworkDebugWin.setDebugVideo(recv_image);
    }
+    if(image.isNull()) qDebug("processPendingDatagram image null");
     //image = QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
 }
 
