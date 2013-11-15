@@ -34,6 +34,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    bool NetworkStarted;
 
     cv::VideoCapture CaptureCamera;
     cv::Size CamSize;

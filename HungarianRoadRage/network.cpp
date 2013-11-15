@@ -1,11 +1,15 @@
 #include "network.h"
 #include <QDebug>
+#include <QCoreApplication>
 
 Network::Network(QObject *parent) :QObject(parent)
 {
     my_socket = new QUdpSocket(this);
-    if (my_socket->bind(QHostAddress::LocalHost, 8000))
+    if (my_socket->bind(QHostAddress::LocalHost, 45000))
+    {
         connect(my_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagram()));
+         QCoreApplication::sendPostedEvents();
+    }
     else
         qDebug("Bind problem");
     //my_socket->bind(QHostAddress("192.168.254.108"), 1337);
@@ -18,7 +22,7 @@ void Network::sendData(QImage sendimage)
    QBuffer buffer(&q);
    buffer.open(QIODevice::WriteOnly);
    sendimage.save(&buffer, "PNG");
-   my_socket->writeDatagram(q, QHostAddress::LocalHost, 8000);
+   my_socket->writeDatagram(q.data(),q.size(), QHostAddress::LocalHost, 45000);
 //    my_socket->writeDatagram(q, QHostAddress("192.168.254.108"), 1337);
 //    std::cerr << QHostAddress::LocalHost <<std::endl;
 }

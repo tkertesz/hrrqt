@@ -20,13 +20,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->ErrorLabel->setText("Camera Error");
         std::cerr<< "Camera open error" <<std::endl;
     }
-    n = new Network();
 
     CamSize = OriginalImageMat.size();
     Processer = new ImageProcesser(CamSize);
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
-    ProcessTimer->start(50);
 
     ///Add the graphics to graphicsview
     scene = new QGraphicsScene(0,0,Settings::ROAD_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
@@ -36,10 +34,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene->addItem(myRoad);
     scene->addItem(myCar);
 
+    ProcessTimer->start(50);
     ///Start the game
     myRoad->setFocus();
     timer.start(1000,this);
     timer2.start(30,this);
+    NetworkStarted =  false;
 }
 
 void MainWindow::processVideoAndUpdateQUI()
@@ -53,6 +53,12 @@ void MainWindow::processVideoAndUpdateQUI()
         CamSize = OriginalImageMat.size();
         Processer->setCamSize(CamSize);
     }
+    if(!NetworkStarted)
+    {
+        n = new Network();
+        NetworkStarted = true;
+    }
+
     int move = Processer->getMove(OriginalImageMat);
     std::cout << "move: " << move <<std::endl;
 

@@ -14,6 +14,7 @@ TEMPLATE = app
 
 CONFIG += c++11
 CONFIG += thread
+CONFIG += debug
 
 #OS X config
 macx:CONFIG += OSXMACHINE
