@@ -61,7 +61,7 @@ void MainWindow::processVideoAndUpdateQUI()
 
     int move = Processer->getMove(OriginalImageMat);
     std::cout << "move: " << move <<std::endl;
-
+//240,150
     cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(240,150), 0, 0, cv::INTER_CUBIC);
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB);
     cv::flip(ResizedImageMat, ResizedImageMat, 1);
@@ -70,13 +70,14 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.rows,
                          ResizedImageMat.step,
                          QImage::Format_RGB888);
+    QImage NetworkSendImage = OriginalImage;
 
-    //QImage debug = QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
+    //QImage debug = QImage("debug/images/kep.png").scaledToHeight(150).scaledToHeight(240);
 
-    n->sendData(OriginalImage);
-    NetworkImage = n->get_image();
+    n->sendData(NetworkSendImage);
+    NetworkGetImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
-    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkGetImage));
 
     ///Move car
     //myRoad->moveCar(move);

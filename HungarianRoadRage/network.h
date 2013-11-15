@@ -23,7 +23,7 @@ public slots:
 private:
     QUdpSocket *my_socket;
     QImage image;
-    DebugWindow NetworkDebugWin;
+//    DebugWindow NetworkDebugWin;
 };
 
 #endif // NETWORK_H

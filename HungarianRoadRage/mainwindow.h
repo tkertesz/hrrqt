@@ -44,7 +44,8 @@ private:
 
     QImage OriginalImage;
     QImage ProcessedImage;
-    QImage NetworkImage;
+    QImage NetworkGetImage;
+    QImage NetworkSendImage;
 
     QTimer* ProcessTimer;
     QBasicTimer timer;
