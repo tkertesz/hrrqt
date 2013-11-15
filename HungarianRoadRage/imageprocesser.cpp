@@ -5,6 +5,8 @@ ImageProcesser::ImageProcesser(cv::Size camsize)
     SizeOfCamera = camsize;
     std::cout << "Camera size set to:\n"<< "Height: " << SizeOfCamera.height << ", Width: " << SizeOfCamera.width <<std::endl;
     DebugWin.show();
+    BackGroundSubtractor.nmixtures = 3;
+    BackGroundSubtractor.bShadowDetection = false;
 }
 
 void ImageProcesser::setCamSize(cv::Size camsize)
@@ -23,6 +25,7 @@ int ImageProcesser::getMove(cv::Mat const &CapturedImage)
 //    cv::erode(HSVImage,OutImage,erodeElement);
 //    cv::dilate(HSVImage,OutImage,dilateElement);
 //    cv::dilate(HSVImage,OutImage,dilateElement);
+
 
     cv::Sobel(HSVImage, OutImage, CV_8U, 1, 0, 3, 1, 0, cv::BORDER_CONSTANT);
 

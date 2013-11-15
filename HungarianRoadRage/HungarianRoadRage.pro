@@ -7,11 +7,13 @@ cache();
 QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += opengl
 
 TARGET = HungarianRoadRage
 TEMPLATE = app
 
 CONFIG += c++11
+CONFIG += thread
 
 #OS X config
 macx:CONFIG += OSXMACHINE
@@ -42,7 +44,7 @@ OSXMACHINE {
 #        -lopencv_nonfree \
 #        -lopencv_ml \
 #        -lopencv_photo \
-#        -lopencv_video \
+        -lopencv_video \
 #        -lopencv_videostab \
 #        -lopencv_stitching \
 #        -lopencv_superres \

@@ -29,7 +29,7 @@ public:
 
 protected:
     //Handling the key press events
-    //void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent *);
     void timerEvent(QTimerEvent *event);
 
 private:
@@ -54,7 +54,7 @@ private:
 
     QString MyIpAddr;
 
-    QGraphicsScene *scene;
+    QGraphicsScene* scene;
     Car* myCar;
     Road* myRoad;
 

@@ -48,7 +48,7 @@ void MainWindow::processVideoAndUpdateQUI()
 
     if (OriginalImageMat.empty()) return;
 
-    if(CamSize.height ==0 && CamSize.width == 0)
+    if(CamSize.height == 0)
     {
         CamSize = OriginalImageMat.size();
         Processer->setCamSize(CamSize);
@@ -82,6 +82,9 @@ MainWindow::~MainWindow()
     delete ProcessTimer;
     delete Processer;
     delete n;
+    delete scene;
+    delete myCar;
+    delete myRoad;
 }
 
 void MainWindow::closeVideoStream()
@@ -92,7 +95,8 @@ void MainWindow::closeVideoStream()
     std::cout << "Camera released" <<std::endl;
 }
 
-void MainWindow::timerEvent(QTimerEvent* event){
+void MainWindow::timerEvent(QTimerEvent* event)
+{
     if (event->timerId() == timer.timerId()) {
         if(myRoad->isHit()){
             if(myRoad->decreaseLife()<1)
@@ -108,5 +112,25 @@ void MainWindow::timerEvent(QTimerEvent* event){
         myRoad->represent();
     }else{
         QWidget::timerEvent(event);
+    }
+}
+
+// Kezeli a billentyűlenyomást
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    switch (event->key())
+    {
+        case Qt::Key_Right:
+                myRoad->moveCar(1); //turn right;
+            break;
+        case Qt::Key_Left:
+                myRoad->moveCar(-1); //turn left;
+            break;
+        case Qt::Key_Escape:
+            closeVideoStream();
+            close();
+            exit(0);
+            break;
+        default:
+            break;
     }
 }
