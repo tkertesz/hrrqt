@@ -4,8 +4,8 @@
 Network::Network(QObject *parent) :QObject(parent)
 {
     my_socket = new QUdpSocket(this);
-    //my_socket->bind(QHostAddress::LocalHost, 1337);
-    my_socket->bind(QHostAddress("192.168.254.98"), 1337);
+    my_socket->bind(QHostAddress::LocalHost, 1337);
+    //my_socket->bind(QHostAddress("192.168.254.108"), 1337);
     connect(my_socket, SIGNAL(readyRead()),
             this, SLOT(processPendingDatagram()));
 }
@@ -16,8 +16,8 @@ void Network::sendData(QImage image)
     QBuffer buffer(&q);
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer, "PNG");
-    //my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
-    my_socket->writeDatagram(q, QHostAddress("192.168.254.108"), 1337);
+    my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
+    //my_socket->writeDatagram(q, QHostAddress("192.168.254.108"), 1337);
     std::cerr << QHostAddress::LocalHost <<std::endl;
 }
 
