@@ -12,13 +12,13 @@ Network::Network(QObject *parent) :QObject(parent)
     NetworkDebugWin.show();
 }
 
-void Network::sendData(QImage image)
+void Network::sendData(QImage sendimage)
 {
-    QByteArray q;
-    QBuffer buffer(&q);
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "PNG");
-    my_socket->writeDatagram(q, QHostAddress::LocalHost, 8000);
+   QByteArray q;
+   QBuffer buffer(&q);
+   buffer.open(QIODevice::WriteOnly);
+   sendimage.save(&buffer, "PNG");
+   my_socket->writeDatagram(q, QHostAddress::LocalHost, 8000);
 //    my_socket->writeDatagram(q, QHostAddress("192.168.254.108"), 1337);
 //    std::cerr << QHostAddress::LocalHost <<std::endl;
 }

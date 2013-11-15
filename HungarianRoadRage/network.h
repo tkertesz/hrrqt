@@ -14,7 +14,7 @@ class Network : public QObject
 public:
     explicit Network(QObject *parent = 0);
     ~Network();
-    void sendData(QImage image);
+    void sendData(QImage sendimage);
 signals:
 
 public slots:
