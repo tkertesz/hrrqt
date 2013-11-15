@@ -28,18 +28,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
     ProcessTimer->start(50);
 
-    //Add the graphics to graphicsview
-    scene = new QGraphicsScene(0,0,Road::ROAD_WIDTH,Road::SCREEN_HEIGHT,ui->graphicsView);
+    ///Add the graphics to graphicsview
+    scene = new QGraphicsScene(0,0,Settings::ROAD_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myCar = new Car;
     myRoad = new Road(myCar);
     scene->addItem(myRoad);
     scene->addItem(myCar);
 
-    //Start the game
+    ///Start the game
     myRoad->setFocus();
     timer.start(1000,this);
-    timer2.start(50,this);
+    timer2.start(30,this);
 }
 
 void MainWindow::processVideoAndUpdateQUI()
@@ -72,7 +72,7 @@ void MainWindow::processVideoAndUpdateQUI()
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkImage));
 
-    //Move car
+    ///Move car
     //myRoad->moveCar(move);
 }
 

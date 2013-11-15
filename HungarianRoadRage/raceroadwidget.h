@@ -17,7 +17,6 @@ class RaceRoadWidget;
 
 class RaceRoadWidget : public QWidget
 {
-    const unsigned int ROAD_SIZE=5;
 
     Q_OBJECT
     QBasicTimer timer;
@@ -35,9 +34,11 @@ protected:
     void timerEvent(QTimerEvent *event);
 
 public:
+    static const unsigned int ROAD_SIZE=5;
+
     explicit RaceRoadWidget(QWidget *parent = 0);
-    void turnLeft();
-    void turnRight();
+    //void turnLeft();
+    //void turnRight();
     ~RaceRoadWidget();
 
     void play();

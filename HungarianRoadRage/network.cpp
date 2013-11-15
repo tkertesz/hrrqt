@@ -16,6 +16,7 @@ void Network::sendData(QImage image)
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer, "PNG");
     my_socket->writeDatagram(q, QHostAddress::LocalHost, 1337);
+    std::cerr << QHostAddress::LocalHost <<std::endl;
 }
 
 void Network::processPendingDatagram()

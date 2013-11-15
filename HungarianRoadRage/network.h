@@ -1,12 +1,11 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <opencv2/imgproc/imgproc.hpp>
 #include <QUdpSocket>
 #include <QImage>
 #include <QBuffer>
 #include <QObject>
-#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
 
 class Network : public QObject
 {
