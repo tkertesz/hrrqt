@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 #include "debugwindow.h"
 
 #include "opencv2/core/core.hpp"
@@ -23,7 +24,8 @@ private:
     cv::Size SizeOfCamera;
     cv::Mat HSVImage;
     cv::Mat OutImage;
-    cv::Mat threshold;
+    cv::Mat Foreground;
+    cv::Mat Background;
 
     cv::BackgroundSubtractorMOG2 BackGroundSubtractor;
 
@@ -31,6 +33,8 @@ private:
 
     const cv::Scalar hsv_min = cvScalar(0, 50, 170, 0);
     const cv::Scalar hsv_max = cvScalar(10, 180, 256, 0);
+
+    std::vector<std::vector<cv::Point> > contours;
 
 public:
     ImageProcesser(cv::Size camsize);
