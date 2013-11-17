@@ -76,21 +76,21 @@ WINDOWSMACHINE{
 
 SOURCES += main.cpp\
         mainwindow.cpp\
-    raceroadwidget.cpp \
     imageprocesser.cpp \
     network.cpp \
     debugwindow.cpp \
     road.cpp \
-    car.cpp
+    car.cpp \
+    pothole.cpp
 
 HEADERS  += mainwindow.h\
-    raceroadwidget.h \
     imageprocesser.h \
     network.h \
     debugwindow.h \
     road.h \
     car.h \
-    settings.h
+    settings.h \
+    pothole.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \
