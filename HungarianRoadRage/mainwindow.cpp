@@ -79,7 +79,7 @@ void MainWindow::processVideoAndUpdateQUI()
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkGetImage));
 
     ///Move car
-    //myRoad->moveCar(move);
+    myRoad->moveCar(move);
 }
 
 MainWindow::~MainWindow()

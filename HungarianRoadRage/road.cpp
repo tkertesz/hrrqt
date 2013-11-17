@@ -8,6 +8,7 @@ Road::Road(QGraphicsItem* parent) : QGraphicsItem(parent),
     myCar = new Car(this);
     myCar->setPos(Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH/2,
                   Settings::SCREEN_HEIGHT+Settings::FIELD_HEIGHT);
+    myCar->setZValue(2);
     generateRoad(0);
     roadPict.load("debug/images/road.png");
 
