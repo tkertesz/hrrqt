@@ -9,7 +9,6 @@
 class Car : public QGraphicsItem
 {
     QPixmap carPict;        //Az autó képe
-    int carPos;             //Az autó helye pixelekben
 
 protected:
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
@@ -18,7 +17,6 @@ protected:
 public:
     Car(QGraphicsItem* parent = NULL);
     QPainterPath shape() const;
-    void move(const short& direction);                          //Az autó oldalirányú mozgatása
 };
 
 #endif // CAR_H

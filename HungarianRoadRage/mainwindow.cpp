@@ -26,20 +26,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
 
-    //ProcessTimer->start(50);
+    ProcessTimer->start(50);
 
     ///Add the graphics to graphicsview
+
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
-    myCar = new Car;
-    myRoad = new Road(myCar);
+    myRoad = new Road();
     scene->addItem(myRoad);
-    scene->addItem(myCar);
 
     ///Start the game
-    timer.start(1000,this);
-    timer2.start(30,this);
-    //NetworkStarted =  false;
+    QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
+    timer.start(1000 / 33);
+    NetworkStarted =  false;
 }
 
 void MainWindow::processVideoAndUpdateQUI()
@@ -100,26 +99,6 @@ void MainWindow::closeVideoStream()
     std::cout << "Video process timer stopped" <<std::endl;
     CaptureCamera.release();
     std::cout << "Camera released" <<std::endl;
-}
-
-void MainWindow::timerEvent(QTimerEvent* event)
-{
-    if (event->timerId() == timer.timerId()) {
-        if(myRoad->isHit()){
-            if(myRoad->decreaseLife()<1)
-            {
-                closeVideoStream();
-                close();
-                exit(0);
-            }
-        }
-        myRoad->represent();
-    } else if(event->timerId() == timer2.timerId()){
-        myRoad->roadStep();
-        myRoad->represent();
-    }else{
-        QWidget::timerEvent(event);
-    }
 }
 
 // Kezeli a billentyűlenyomást

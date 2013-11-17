@@ -8,18 +8,17 @@
 
 class Pothole : public QGraphicsItem
 {
-    QPixmap potholePict;        //A kátyú képe
-    int potholeVPos;            //A kátyú függőleges helye pixelben
-    int potholeHPos;            //A kátyú vízszintes helye pixelben
+    QPixmap potholePict;    //A kátyú képe
+    unsigned short depth;   //A kátyú mélysége
 
 protected:
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
     QRectF boundingRect() const;
 
 public:
-    Pothole(int Vcord, int Hcord, QGraphicsItem* parent = NULL);
+    Pothole(QGraphicsItem* parent = NULL);
     QPainterPath shape() const;
-    bool step(unsigned int pixels = 10);
+    unsigned short conflict();
 };
 
 #endif // POTHOLE_H

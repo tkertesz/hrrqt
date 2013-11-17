@@ -30,7 +30,6 @@ public:
 protected:
     //Handling the key press events
     void keyPressEvent(QKeyEvent *);
-    void timerEvent(QTimerEvent *event);
 
 private:
     Ui::MainWindow *ui;
@@ -48,7 +47,7 @@ private:
     QImage NetworkSendImage;
 
     QTimer* ProcessTimer;
-    QBasicTimer timer;
+    QTimer timer;
     QBasicTimer timer2;
 
     ImageProcesser* Processer;
