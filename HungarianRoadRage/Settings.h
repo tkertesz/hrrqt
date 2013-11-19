@@ -3,7 +3,7 @@
 
 class Settings{
 public:
-    static const short          STEP_SIZE     = 5;                  //A lépésenként mozgó pixelek száma
+    static const short          STEP_SIZE     = 7;                  //A lépésenként mozgó pixelek száma
     static const int            SCREEN_WIDTH  = 500;                //Út és a képernyő szélessége
     static const int            SCREEN_HEIGHT = 590;                //Képernyő magassága, egyenlő a graphicsview magasságával!!!
     static const int            ROAD_HEIGHT   = 942;                //Út magassága, NE változtasd!

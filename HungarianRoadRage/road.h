@@ -16,6 +16,7 @@ class Road : public QGraphicsItem
     std::vector <Pothole*> potholes;// A kátyúk vektora
     void generateRoad(const int& difficulty);
                                     // Legenerálja a következő útszakaszt
+    void movePotholes();
 
 protected:
     void advance(int step);

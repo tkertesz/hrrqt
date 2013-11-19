@@ -16,6 +16,6 @@ void Car::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 QPainterPath Car::shape() const
 {
     QPainterPath path;
-    path.addRect(0,0,Settings::FIELD_WIDTH-5,Settings::FIELD_HEIGHT*2);
+    path.addRect(-5,-10,Settings::FIELD_WIDTH-5,Settings::FIELD_HEIGHT*2-10);
     return path;
 }
