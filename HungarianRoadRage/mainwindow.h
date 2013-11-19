@@ -6,11 +6,11 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QNetworkInterface>
+#include <QGraphicsScene>
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "imageprocesser.h"
 #include "network.h"
-#include <QGraphicsScene>
 #include "car.h"
 #include "road.h"
 

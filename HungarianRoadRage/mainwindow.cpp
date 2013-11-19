@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer->start(50);
 
     ///Add the graphics to graphicsview
-
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myRoad = new Road();
@@ -37,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ///Start the game
     QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
-    timer.start(1000 / 33);
+    timer.start(Settings::FREQUENCY);
     NetworkStarted =  false;
 }
 
