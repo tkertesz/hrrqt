@@ -11,8 +11,7 @@ Road::Road(QGraphicsItem* parent) : QGraphicsItem(parent),
     myCar->setZValue(2);
     generateRoad(0);
     roadPict.load("debug/images/road.png");
-    std::cout<<Settings::ROAD_SIZE<<std::endl;
-
+    roadGenerator = new RoadGenerator();
 }
 
 //Megadja a tartalmazó négyzet méretét
@@ -68,21 +67,20 @@ void Road::moveCar(const short& direction){ //direction -1: bal, 1:jobb
 }
 
 //Véletlen számokkal generál ROAD_SIZE-méretű utat
-///TODO ezt még ki kell fejleszteni!
-void Road::generateRoad(const int& difficulty){
-    if(difficulty!=0){
-        for(int i=-(Settings::SCREEN_HEIGHT/Settings::FIELD_HEIGHT);i<0;i++){
-            for(int j(0);j<3;j++){
-                if(rand()%100<20) {
-                    Pothole *idPot = new Pothole(this);
-                    idPot->setPos(Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH*1.5+j*Settings::FIELD_WIDTH,i*Settings::FIELD_HEIGHT);
-                    idPot->setZValue(1);
-                    potholes.push_back(idPot);
-                }
+void Road::generateRoad(const unsigned short& difficulty){
+    if(difficulty==0)return;
+    std::vector<std::vector<bool> > idRoad = roadGenerator->getRoad(difficulty);
+    for(unsigned int i=0;i<idRoad.size();i++){
+        for(unsigned int j=0;j<idRoad[i].size();j++){
+            if(idRoad[i][j] == true){
+                Pothole *idPot = new Pothole(this);
+                idPot->setPos(Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH*1.5+j*Settings::FIELD_WIDTH,-(int)(i+1)*Settings::FIELD_HEIGHT);
+                idPot->setZValue(1);
+                potholes.push_back(idPot);
             }
         }
     }
-    std::cout <<"Road generated with difficulty: " << difficulty <<std::endl;
+    //std::cout <<"Road generated with difficulty: " << difficulty <<std::endl;
 }
 
 Road::~Road(){

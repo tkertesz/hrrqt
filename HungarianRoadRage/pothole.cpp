@@ -26,6 +26,9 @@ QPainterPath Pothole::shape() const
 
 //Ha ütközik az autóval visszatér 1-el ha már ütközött vele az autó visszatér 0-val.
 unsigned short Pothole::conflict(){
-    if(depth--<=0)return 0;
-    return 1;
+    if(depth>0){
+        depth--;
+        return 1;
+    }
+    return 0;
 }

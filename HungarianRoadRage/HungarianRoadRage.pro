@@ -81,7 +81,8 @@ SOURCES += main.cpp\
     debugwindow.cpp \
     road.cpp \
     car.cpp \
-    pothole.cpp
+    pothole.cpp \
+    roadgenerator.cpp
 
 HEADERS  += mainwindow.h\
     imageprocesser.h \
@@ -90,7 +91,8 @@ HEADERS  += mainwindow.h\
     road.h \
     car.h \
     settings.h \
-    pothole.h
+    pothole.h \
+    roadgenerator.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \

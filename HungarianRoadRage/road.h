@@ -7,6 +7,7 @@
 #include "settings.h"
 #include "car.h"
 #include "pothole.h"
+#include "roadgenerator.h"
 
 class Road : public QGraphicsItem
 {
@@ -15,8 +16,9 @@ class Road : public QGraphicsItem
     QPixmap roadPict;                           // A road képe
     Car* myCar;                                 // Az autó
     std::vector <Pothole*> potholes;            // A kátyúk vektora
-    void generateRoad(const int& difficulty);   // Legenerálja a következő útszakaszt
+    void generateRoad(const unsigned short& difficulty); // Legenerálja a következő útszakaszt
     void movePotholes();                        // A kátyúkat az elmozgatott útra helyezi
+    RoadGenerator* roadGenerator;               // Az útgeneráló osztály
 
 protected:
     void advance(int step);                     // Léptetés
