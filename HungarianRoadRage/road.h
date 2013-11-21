@@ -13,6 +13,9 @@ class Road : public QGraphicsItem
 {
     int life;                                   // Az autó életeinek a száma
     bool isDisplay;                             // Kiirattuk-e az életváltozást
+    int distance;
+    int speed;
+    int accel;
     QPixmap roadPict;                           // A road képe
     Car* myCar;                                 // Az autó
     std::vector <Pothole*> potholes;            // A kátyúk vektora

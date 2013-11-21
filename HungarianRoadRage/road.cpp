@@ -2,9 +2,9 @@
 
 //Beállítja a változókat
 Road::Road(QGraphicsItem* parent) : QGraphicsItem(parent),
-     life(10),isDisplay(false)
+    life(3),isDisplay(false),distance(0),speed(Settings::STEP_SIZE),accel(0)
 {
-    setPos(0,Settings::SCREEN_HEIGHT-Settings::ROAD_HEIGHT+Settings::STEP_SIZE);
+    setPos(0,Settings::SCREEN_HEIGHT-Settings::ROAD_HEIGHT);
     myCar = new Car(this);
     myCar->setPos(Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH/2,
                   Settings::ROAD_HEIGHT-(Settings::FIELD_HEIGHT*3));
@@ -28,8 +28,15 @@ void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 //Animációért felelős
 void Road::advance(int step){
     if(!step) return;   //ha step 0, akkor nem csinál semmit
-    moveBy(0,Settings::STEP_SIZE);          //lépteti az utat és a kocsit
-    myCar->moveBy(0,-Settings::STEP_SIZE);
+    moveBy(0,speed);          //lépteti az utat és a kocsit
+    myCar->moveBy(0,-speed);
+    accel++;
+    distance+=speed/5;
+    if(accel>100){
+        accel=0;
+        speed=speed*1.3;
+        std::cout<<"TÁVOLSÁG: "<<distance<<std::endl;
+    }
     if(pos().y()>Settings::SCREEN_HEIGHT){  //ha az út kiment a képernyőről újra beállítja a koordinátákat
         moveBy(0,-Settings::ROAD_HEIGHT);
         myCar->moveBy(0,Settings::ROAD_HEIGHT);
@@ -41,8 +48,14 @@ void Road::advance(int step){
         if(myCar->collidesWithItem(potholes[i])){
             int depth=potholes[i]->conflict();
             if(depth>0){
+                speed=Settings::STEP_SIZE;
+                accel=0;
                 life-=depth;
                 isDisplay=false;
+                if(life<0){
+                    std::cout<<"HALÁL!"<<std::endl;
+                    //exit(0);
+                }
             }
             if(!isDisplay){
                 std::cout<<"ELET: "<<life<<std::endl;
