@@ -89,7 +89,8 @@ SOURCES += main.cpp\
     road.cpp \
     car.cpp \
     pothole.cpp \
-    roadgenerator.cpp
+    roadgenerator.cpp \
+    startview.cpp
 
 HEADERS  += mainwindow.h\
     imageprocesser.h \
@@ -99,11 +100,13 @@ HEADERS  += mainwindow.h\
     car.h \
     settings.h \
     pothole.h \
-    roadgenerator.h
+    roadgenerator.h \
+    startview.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \
-    debugwindow.ui
+    debugwindow.ui \
+    startview.ui
 
 OTHER_FILES += images/*
 OTHER_FILES += roads/*
