@@ -75,7 +75,7 @@ void MainWindow::processVideoAndUpdateQUI()
     QImage NetworkSendImage = OriginalImage;
 
     //QImage debug = QImage("debug/images/kep.png").scaledToHeight(150).scaledToHeight(240);
-
+    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
 
     n->sendData(NetworkSendImage);
 
