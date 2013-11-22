@@ -40,7 +40,7 @@ void Road::advance(int step){
         myCar->moveBy(-speed,0);
     }
     accel++;
-    //sendDistanceNumber(accel);
+    emit sendDistanceNumber(accel);
     distance+=speed/5;
     if(accel>100){
         accel=0;
