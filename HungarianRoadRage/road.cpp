@@ -40,6 +40,7 @@ void Road::advance(int step){
         myCar->moveBy(-speed,0);
     }
     accel++;
+    //sendDistanceNumber(accel);
     distance+=speed/5;
     if(accel>100){
         accel=0;
@@ -60,6 +61,7 @@ void Road::advance(int step){
                 speed=Settings::STEP_SIZE;
                 accel=0;
                 life-=depth;
+                emit sendLifeNumber(life);
                 isDisplay=false;
                 if(life<0){
                     std::cout<<"HALÁL!"<<std::endl;

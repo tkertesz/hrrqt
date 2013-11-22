@@ -35,6 +35,10 @@ public:
     ~Road();
 
     void moveCar(const short& direction);   //Oldalra mozgatja az autót
+
+signals:
+    void sendLifeNumber(int live);
+    //void sendDistanceNumber(int distance);
 };
 
 #endif // ROAD_H
