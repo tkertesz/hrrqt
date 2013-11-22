@@ -32,19 +32,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myRoad = new Road();
+    ui->MyLifeLCD->display(Settings::STARTLIFE);
+    QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
     scene->addItem(myRoad);
 
     ///Start the game
     QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
     timer.start(Settings::FREQUENCY);
     NetworkStarted =  false;
-    QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
 }
 
 void MainWindow::receiveLifeNumber(int i)
 {
     lives = i;
-    ui->MyLifeLCD->setDigitCount(lives);
+    ui->MyLifeLCD->display(lives);
 }
 void MainWindow::processVideoAndUpdateQUI()
 {

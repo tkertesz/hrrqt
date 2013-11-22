@@ -1,7 +1,7 @@
 #ifndef ROAD_H
 #define ROAD_H
 
-#include <QGraphicsItem>
+#include <QGraphicsWidget>
 #include <iostream>
 #include <QtGui>
 #include "settings.h"
@@ -9,8 +9,10 @@
 #include "pothole.h"
 #include "roadgenerator.h"
 
-class Road : public QGraphicsItem
+class Road : public QGraphicsWidget
 {
+    Q_OBJECT
+
     int life;                                   // Az autó életeinek a száma
     bool isDisplay;                             // Kiirattuk-e az életváltozást
     int distance;
@@ -31,14 +33,14 @@ protected:
     QRectF boundingRect() const;                // Út mérete
 
 public:
-    Road(QGraphicsItem* parent = NULL);
+    Road(QGraphicsWidget* parent = NULL);
     ~Road();
 
     void moveCar(const short& direction);   //Oldalra mozgatja az autót
 
 signals:
-    void sendLifeNumber(int live);
-    //void sendDistanceNumber(int distance);
+    void sendLifeNumber(int life);
+    void sendDistanceNumber(int distance);
 };
 
 #endif // ROAD_H

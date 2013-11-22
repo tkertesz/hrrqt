@@ -1,8 +1,8 @@
 #include "road.h"
 
 //Beállítja a változókat
-Road::Road(QGraphicsItem* parent) : QGraphicsItem(parent),
-    life(3),isDisplay(false),distance(0),speed(Settings::STEP_SIZE),
+Road::Road(QGraphicsWidget* parent) : QGraphicsWidget(parent),
+    life(Settings::STARTLIFE),isDisplay(false),distance(0),speed(Settings::STEP_SIZE),
     accel(0),moving(0)
 {
     setPos(0,Settings::SCREEN_HEIGHT-Settings::ROAD_HEIGHT);

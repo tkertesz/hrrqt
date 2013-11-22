@@ -11,7 +11,7 @@ public:
     static const int            FIELD_WIDTH  = SCREEN_WIDTH/4.635;  //Egy mezőnek a szélessége
     static const int            FIELD_HEIGHT = SCREEN_WIDTH/5.453;  //Egy mező magassága
     static const unsigned int   ROAD_SIZE  = (SCREEN_HEIGHT+ROAD_HEIGHT)/FIELD_HEIGHT;    //Hány koordináta fér el a képernyő hosszán
-
+    static const int            STARTLIFE = 3;
 };
 
 #endif // SETTINGS_H
