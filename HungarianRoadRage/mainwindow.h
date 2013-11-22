@@ -60,11 +60,13 @@ private:
     Road* myRoad;
 
     int lives;
+    int distance;
 
 public slots:
     void processVideoAndUpdateQUI();
     void receiveNetworkImage(QImage q);
     void receiveLifeNumber(int i);
+    void receiveDistanceNumber(int i);
 
 };
 

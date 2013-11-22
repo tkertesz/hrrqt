@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     myRoad = new Road();
     ui->MyLifeLCD->display(Settings::STARTLIFE);
     QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
+    QObject::connect(myRoad, SIGNAL(sendDistanceNumber(int)), this, SLOT(receiveDistanceNumber(int)));
     scene->addItem(myRoad);
 
     ///Start the game
@@ -46,6 +47,12 @@ void MainWindow::receiveLifeNumber(int i)
 {
     lives = i;
     ui->MyLifeLCD->display(lives);
+}
+
+void MainWindow::receiveDistanceNumber(int i)
+{
+    distance = i;
+    ui->MyDistLCD->display(distance);
 }
 void MainWindow::processVideoAndUpdateQUI()
 {
