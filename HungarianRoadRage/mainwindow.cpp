@@ -67,10 +67,7 @@ void MainWindow::processVideoAndUpdateQUI()
     }
     if(!NetworkStarted)
     {
-        //QThread producerThread;
-        //n.moveToThread(&producerThread);
         n = new Network();
-        //MainWindow::connect(n, SIGNAL(Network::receivedImage(QImage)),SLOT(receiveNetworkImage(QImage)));
         QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
         NetworkStarted = true;
     }
@@ -78,23 +75,20 @@ void MainWindow::processVideoAndUpdateQUI()
     //int move = Processer->getMove(OriginalImageMat);
     //std::cout << "move: " << move <<std::endl;
 //240,150
-    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC);
-    cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB);
-    cv::flip(ResizedImageMat, ResizedImageMat, 1);
+    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC); //resizing the image to fit in the UI
+    cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
+    cv::flip(ResizedImageMat, ResizedImageMat, 1); //eliminating the mirror effect
+
     QImage OriginalImage((uchar*)ResizedImageMat.data,
                          ResizedImageMat.cols,
                          ResizedImageMat.rows,
                          ResizedImageMat.step,
-                         QImage::Format_RGB888);
+                         QImage::Format_RGB888); //Creating the QImage for the label
     QImage NetworkSendImage = OriginalImage;
 
-    //QImage debug = QImage("debug/images/kep.png").scaledToHeight(150).scaledToHeight(240);
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
 
-    n->sendData(NetworkSendImage);
-
-    //NetworkGetImage = n->get_image();
-//    cv::resize(NetworkGetImage,NetworkGetImage,cv::Size(400,250),0,0, cv::INTER_CUBIC);
+    n->sendData(NetworkSendImage); //sending the image over the network
 
     ///Move car
     //myRoad->moveCar(move);
@@ -103,7 +97,7 @@ void MainWindow::processVideoAndUpdateQUI()
 ///Public slot that receives the image from the networking thread
 void MainWindow::receiveNetworkImage(QImage q)
 {
-    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q));
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
 }
 
 MainWindow::~MainWindow()

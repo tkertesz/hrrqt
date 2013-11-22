@@ -5,8 +5,9 @@
 #include <QImage>
 #include <QBuffer>
 #include <QObject>
+#include <QDebug>
+#include <QCoreApplication>
 #include <iostream>
-#include "debugwindow.h"
 
 class Network : public QObject
 {
@@ -15,16 +16,16 @@ public:
     explicit Network(QObject *parent = 0);
     ~Network();
     void sendData(QImage sendimage);
+
 signals:
     void receivedImage(QImage q);
 
 public slots:
     void processPendingDatagram();
-    QImage get_image();
+
 private:
     QUdpSocket *my_socket;
-    QImage image;
-//    DebugWindow NetworkDebugWin;
+
 };
 
 #endif // NETWORK_H
