@@ -61,6 +61,7 @@ private:
 
 public slots:
     void processVideoAndUpdateQUI();
+    void receiveNetworkImage(QImage q);
 
 };
 

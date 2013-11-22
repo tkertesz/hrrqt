@@ -47,7 +47,7 @@ void Network::processPendingDatagram()
 
         if (recv_image.isNull())		      // Check if the image was indeed received
                 qDebug("The image is null. Something failed.");
-        image = recv_image;
+        emit receivedImage(recv_image);
 //        NetworkDebugWin.setDebugVideo(recv_image);
    }
     if(image.isNull()) qDebug("processPendingDatagram image null");

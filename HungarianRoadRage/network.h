@@ -16,6 +16,7 @@ public:
     ~Network();
     void sendData(QImage sendimage);
 signals:
+    void receivedImage(QImage q);
 
 public slots:
     void processPendingDatagram();

@@ -53,7 +53,11 @@ void MainWindow::processVideoAndUpdateQUI()
     }
     if(!NetworkStarted)
     {
+        //QThread producerThread;
+        //n.moveToThread(&producerThread);
         n = new Network();
+        //MainWindow::connect(n, SIGNAL(Network::receivedImage(QImage)),SLOT(receiveNetworkImage(QImage)));
+        QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
         NetworkStarted = true;
     }
 
@@ -72,13 +76,19 @@ void MainWindow::processVideoAndUpdateQUI()
 
     //QImage debug = QImage("debug/images/kep.png").scaledToHeight(150).scaledToHeight(240);
 
+
     n->sendData(NetworkSendImage);
-    NetworkGetImage = n->get_image();
+    //NetworkGetImage = n->get_image();
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
-    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(NetworkGetImage));
 
     ///Move car
     myRoad->moveCar(move);
+}
+
+///Public slot that receives the image from the networking thread
+void MainWindow::receiveNetworkImage(QImage q)
+{
+    ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q));
 }
 
 MainWindow::~MainWindow()
