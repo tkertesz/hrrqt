@@ -38,8 +38,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
     timer.start(Settings::FREQUENCY);
     NetworkStarted =  false;
+    QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
 }
 
+void MainWindow::receiveLifeNumber(int i)
+{
+    lives = i;
+    ui->MyLifeLCD->setDigitCount(lives);
+}
 void MainWindow::processVideoAndUpdateQUI()
 {
     CaptureCamera.read(OriginalImageMat);

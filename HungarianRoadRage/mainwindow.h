@@ -59,9 +59,12 @@ private:
     Car* myCar;
     Road* myRoad;
 
+    int lives;
+
 public slots:
     void processVideoAndUpdateQUI();
     void receiveNetworkImage(QImage q);
+    void receiveLifeNumber(int i);
 
 };
 
