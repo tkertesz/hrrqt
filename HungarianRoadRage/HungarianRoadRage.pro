@@ -26,8 +26,11 @@ OSXMACHINE {
     #To copy images directory
     APP_IMAGE_FILES.files = images
     APP_IMAGE_FILES.path = Contents/MacOS/debug
+    APP_ROAD_FILES.files = roads
+    APP_ROAD_FILES.path = Contents/MacOS/debug
 
     QMAKE_BUNDLE_DATA += APP_IMAGE_FILES
+    QMAKE_BUNDLE_DATA += APP_ROAD_FILES
 
     INCLUDEPATH += /opt/local/include
 
@@ -66,7 +69,11 @@ WINDOWSMACHINE{
     APP_IMAGE_FILES.files = images
     APP_IMAGE_FILES.path = def
 
+    APP_ROAD_FILES.files = roads
+    APP_ROAD_FILES.path = def
+
     QMAKE_BUNDLE_DATA += APP_IMAGE_FILES
+    QMAKE_BUNDLE_DATA += APP_ROAD_FILES
 
     INCLUDEPATH += C://OpenCV//OpenCV_bin//install//include
     LIBS += C://OpenCV//OpenCV_bin//bin//*.dll
@@ -82,7 +89,8 @@ SOURCES += main.cpp\
     road.cpp \
     car.cpp \
     pothole.cpp \
-    roadgenerator.cpp
+    roadgenerator.cpp \
+    startview.cpp
 
 HEADERS  += mainwindow.h\
     imageprocesser.h \
@@ -92,13 +100,16 @@ HEADERS  += mainwindow.h\
     car.h \
     settings.h \
     pothole.h \
-    roadgenerator.h
+    roadgenerator.h \
+    startview.h
 
 FORMS    += mainwindow.ui \
     raceroadwidget.ui \
-    debugwindow.ui
+    debugwindow.ui \
+    startview.ui
 
 OTHER_FILES += images/*
+OTHER_FILES += roads/*
 
 # Megjegyzesek:
 # Amiket kikommenteltem az OS X konfigban, azok nem kellenek egyelore, windows-nal is szerkesszetek be

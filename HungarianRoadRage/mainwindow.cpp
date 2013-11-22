@@ -61,10 +61,10 @@ void MainWindow::processVideoAndUpdateQUI()
         NetworkStarted = true;
     }
 
-    int move = Processer->getMove(OriginalImageMat);
-    std::cout << "move: " << move <<std::endl;
+    //int move = Processer->getMove(OriginalImageMat);
+    //std::cout << "move: " << move <<std::endl;
 //240,150
-    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(240,150), 0, 0, cv::INTER_CUBIC);
+    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC);
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB);
     cv::flip(ResizedImageMat, ResizedImageMat, 1);
     QImage OriginalImage((uchar*)ResizedImageMat.data,
@@ -78,11 +78,12 @@ void MainWindow::processVideoAndUpdateQUI()
 
 
     n->sendData(NetworkSendImage);
+
     //NetworkGetImage = n->get_image();
-    ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
+//    cv::resize(NetworkGetImage,NetworkGetImage,cv::Size(400,250),0,0, cv::INTER_CUBIC);
 
     ///Move car
-    myRoad->moveCar(move);
+    //myRoad->moveCar(move);
 }
 
 ///Public slot that receives the image from the networking thread
