@@ -16,6 +16,7 @@ class Road : public QGraphicsItem
     int distance;
     int speed;
     int accel;
+    int moving;
     QPixmap roadPict;                           // A road képe
     Car* myCar;                                 // Az autó
     std::vector <Pothole*> potholes;            // A kátyúk vektora

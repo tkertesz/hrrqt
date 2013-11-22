@@ -2,7 +2,8 @@
 
 //Beállítja a változókat
 Road::Road(QGraphicsItem* parent) : QGraphicsItem(parent),
-    life(3),isDisplay(false),distance(0),speed(Settings::STEP_SIZE),accel(0)
+    life(3),isDisplay(false),distance(0),speed(Settings::STEP_SIZE),
+    accel(0),moving(0)
 {
     setPos(0,Settings::SCREEN_HEIGHT-Settings::ROAD_HEIGHT);
     myCar = new Car(this);
@@ -30,6 +31,14 @@ void Road::advance(int step){
     if(!step) return;   //ha step 0, akkor nem csinál semmit
     moveBy(0,speed);          //lépteti az utat és a kocsit
     myCar->moveBy(0,-speed);
+    if(moving>0){
+        moving-=speed;
+        myCar->moveBy(speed,0);
+    }
+    if(moving<0){
+        moving+=speed;
+        myCar->moveBy(-speed,0);
+    }
     accel++;
     distance+=speed/5;
     if(accel>100){
@@ -69,12 +78,14 @@ void Road::advance(int step){
 ///TODO: még jobbra le tud lépni a tesztelés érdekében!
 void Road::moveCar(const short& direction){ //direction -1: bal, 1:jobb
     if(direction==-1){
-        if(myCar->pos().x()>Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH*0.5){
-            myCar->moveBy(-Settings::FIELD_WIDTH,0);
+        if(myCar->pos().x()+moving>Settings::SCREEN_WIDTH/2-Settings::FIELD_WIDTH*0.5){
+            moving+=-Settings::FIELD_WIDTH;
+            //myCar->moveBy(-Settings::FIELD_WIDTH,0);
         }
     }else if(direction==1){
-        if(myCar->pos().x()<Settings::SCREEN_WIDTH/2+Settings::FIELD_WIDTH*1.5){
-            myCar->moveBy(Settings::FIELD_WIDTH,0);
+        if(myCar->pos().x()+moving<Settings::SCREEN_WIDTH/2+Settings::FIELD_WIDTH*1.5){
+            moving+=Settings::FIELD_WIDTH;
+            //myCar->moveBy(Settings::FIELD_WIDTH,0);
         }
     }
 }
