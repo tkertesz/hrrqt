@@ -3,10 +3,11 @@
 RoadGenerator::RoadGenerator()
 {
     gate=1;
-    readRoadFromFile("debug/roads/easyRoads.rds");
+    readRoadFromFile("debug/roads/easyRoads.rds",1);
+    readRoadFromFile("debug/roads/normalRoads.rds",2);
 }
 
-void RoadGenerator::readRoadFromFile(std::string fileName)
+void RoadGenerator::readRoadFromFile(std::string fileName,int diff)
 {
 
     // Create streamobject
@@ -32,20 +33,34 @@ void RoadGenerator::readRoadFromFile(std::string fileName)
             }
             roadSample.road.push_back(idVec);
         }
-        easyRoads.push_back(roadSample);
+        if(diff==1){
+            easyRoads.push_back(roadSample);
+        }else if(diff==2){
+            normalRoads.push_back(roadSample);
+        }
     }
     infile.close();
 }
 
 std::vector<std::vector<bool> > RoadGenerator::getRoad(unsigned short diff){
-    roadSample idS;
-    if(diff !=1 )return idS.road;
     bool good=false;
     int r(0);
-    while(!good){
-        r = rand()%easyRoads.size();
-        if(easyRoads[r].in==gate)good=true;
+    if(diff == 1){
+        while(!good){
+            r = rand()%easyRoads.size();
+            if(easyRoads[r].in==gate)good=true;
+        }
+        gate=easyRoads[r].out;
+        return easyRoads[r].road;
+    }else if(diff == 2){
+        while(!good){
+            r = rand()%normalRoads.size();
+            if(normalRoads[r].in==gate)good=true;
+        }
+        gate=normalRoads[r].out;
+        return normalRoads[r].road;
+    }else{
+        roadSample idS;
+        return idS.road;
     }
-    gate=easyRoads[r].out;
-    return easyRoads[r].road;
 }

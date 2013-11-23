@@ -14,9 +14,10 @@ class RoadGenerator
         std::vector<std::vector<bool> > road;
     };
     std::vector<roadSample> easyRoads;
+    std::vector<roadSample> normalRoads;
     unsigned short gate;
 
-    void readRoadFromFile(std::string fileName);
+    void readRoadFromFile(std::string fileName,int diff);
 
 public:
     RoadGenerator();
