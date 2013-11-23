@@ -17,7 +17,6 @@ protected:
 public:
     Car(QGraphicsItem* parent = NULL);
     QPainterPath shape() const;
-    void rotate(int deg);
 };
 
 #endif // CAR_H

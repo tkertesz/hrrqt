@@ -14,15 +14,13 @@ QRectF Pothole::boundingRect() const{
 //Kirajzolja a kátyút
 void Pothole::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     painter->drawPixmap(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT,potholePict);
-    painter->drawEllipse(QPointF(53,50),43,35);
 }
 
 //Visszatér a kátyú széleivel
 QPainterPath Pothole::shape() const
 {
     QPainterPath path;
-    path.addEllipse(QPointF(53,50),43,35);
-    //path.addRect(0,0,Settings::FIELD_WIDTH-20,Settings::FIELD_HEIGHT-25);
+    path.addRect(0,0,Settings::FIELD_WIDTH-20,Settings::FIELD_HEIGHT-25);
     return path;
 }
 
