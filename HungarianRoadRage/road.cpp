@@ -67,7 +67,7 @@ void Road::advance(int step){
                 life-=depth;
                 isDisplay=false;
                 if(life<0){
-                    std::cout<<"HALÁL!"<<std::endl;
+                    emit stopGame(false);
                 }
             }
             if(!isDisplay){
@@ -106,7 +106,6 @@ void Road::generateRoad(const unsigned short& difficulty){
             }
         }
     }
-    //std::cout <<"Road generated with difficulty: " << difficulty <<std::endl;
 }
 
 Road::~Road(){

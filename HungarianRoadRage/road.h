@@ -42,6 +42,7 @@ public:
 signals:
     void sendLifeNumber(int life);
     void sendDistanceNumber(int distance);
+    void stopGame(bool isWin);
 };
 
 #endif // ROAD_H

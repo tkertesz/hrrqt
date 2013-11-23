@@ -71,6 +71,7 @@ public slots:
     void receiveNetworkImage(QImage q);
     void receiveLifeNumber(int i);
     void receiveDistanceNumber(int i);
+    void lose(bool isWin);
 
 };
 
