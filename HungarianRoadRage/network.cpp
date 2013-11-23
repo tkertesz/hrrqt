@@ -1,6 +1,4 @@
 #include "network.h"
-#include <QDebug>
-#include <QCoreApplication>
 
 Network::Network(QObject *parent) :QObject(parent)
 {
@@ -8,14 +6,14 @@ Network::Network(QObject *parent) :QObject(parent)
     if (my_socket->bind(QHostAddress::LocalHost, 45000))
     {
         connect(my_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagram()));
-        QCoreApplication::sendPostedEvents();
+        QCoreApplication::sendPostedEvents(); //not really necessary, but no problem :)
     }
     else
         qDebug("Bind problem");
-//    my_socket->bind(QHostAddress("192.168.254.108"), 1337);
-//    NetworkDebugWin.show();
 }
 
+
+//Domi, mi lenne ha itt adnank meg neki, hogy mit akarunk beleirni???
 void Network::sendData(QImage sendimage)
 {
    QByteArray q;
@@ -23,8 +21,6 @@ void Network::sendData(QImage sendimage)
    buffer.open(QIODevice::WriteOnly);
    sendimage.save(&buffer, "JPG");
    my_socket->writeDatagram(q.data(),q.size(), QHostAddress::LocalHost, 45000);
-//    my_socket->writeDatagram(q, QHostAddress("192.168.254.108"), 1337);
-//    std::cerr << QHostAddress::LocalHost <<std::endl;
 }
 
 void Network::processPendingDatagram()
@@ -33,31 +29,19 @@ void Network::processPendingDatagram()
     while (my_socket->hasPendingDatagrams()) {
         QByteArray datagram;
         QHostAddress sender;
-        quint16 senderPort;
+        quint16 senderPort = 45000;
         datagram.resize(my_socket->pendingDatagramSize());
-
+//Domi itt majd a senderPort-ot meg a sendert beallitjuk a masik IP-re es akkor nem lesz beleszolas mashonnan :)
         my_socket->readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
-        //QImage recv_image((uchar*)datagram.data(), 240, 150, QImage::Format_RGB888);
         QImage recv_image;
         if (datagram.isNull())
-            qDebug("Ures a bejovo!!!");
-        else
-            qDebug("datagram nem ures");
+            qDebug("Empty incoming datagram");
         recv_image.loadFromData(datagram, "JPG");
 
         if (recv_image.isNull())		      // Check if the image was indeed received
                 qDebug("The image is null. Something failed.");
         emit receivedImage(recv_image);
-//        NetworkDebugWin.setDebugVideo(recv_image);
    }
-    if(image.isNull()) qDebug("processPendingDatagram image null");
-//    image = QImage("debug/images/kep.png").scaledToHeight(240).scaledToHeight(150);
-}
-
-QImage Network::get_image()
-{
-    if(image.isNull()) qDebug("get_image image null");
-    return image;
 }
 
 Network::~Network()

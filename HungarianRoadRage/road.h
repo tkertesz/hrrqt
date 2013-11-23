@@ -2,8 +2,9 @@
 #define ROAD_H
 
 #include <QGraphicsWidget>
-#include <iostream>
+#include <QObject>
 #include <QtGui>
+#include <iostream>
 #include "settings.h"
 #include "car.h"
 #include "pothole.h"
@@ -33,7 +34,7 @@ protected:
     QRectF boundingRect() const;                // Út mérete
 
 public:
-    Road(QGraphicsWidget* parent = NULL);
+    explicit Road(QGraphicsWidget* parent = NULL);
     ~Road();
 
     void moveCar(const short& direction);   //Oldalra mozgatja az autót

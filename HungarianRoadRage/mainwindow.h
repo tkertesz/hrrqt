@@ -24,28 +24,29 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void closeVideoStream();
+    void closeVideoStream(); //Release the camera hardware and stopping the processer's timer
     ~MainWindow();
 
 protected:
-    //Handling the key press events
-    void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent *); //Handling the key press events
 
 private:
     Ui::MainWindow *ui;
-    bool NetworkStarted;
 
+    //CV
     cv::VideoCapture CaptureCamera;
     cv::Size CamSize;
     cv::Mat OriginalImageMat;
     cv::Mat ProcessedImageMat;
     cv::Mat ResizedImageMat;
 
+    //Images
     QImage OriginalImage;
     QImage ProcessedImage;
     QImage NetworkGetImage;
     QImage NetworkSendImage;
 
+    //Timers
     QTimer* ProcessTimer;
     QTimer timer;
     QBasicTimer timer2;
@@ -55,10 +56,13 @@ private:
 
     QString MyIpAddr;
 
+    //Graphics
     QGraphicsScene* scene;
     Car* myCar;
     Road* myRoad;
 
+    //Other usefull variables :)
+    bool NetworkStarted;
     int lives;
     int distance;
 
