@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include "debugwindow.h"
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -24,10 +23,12 @@ private:
     cv::Size SizeOfCamera;
     cv::Mat ProcessingImage;
     cv::Mat OutImage;
-    cv::Mat Foreground;
-    cv::Mat Background;
+    cv::Mat AvgImage;
+    cv::Mat FirstImage;
 
-    DebugWindow DebugWin;
+    bool IsFirst;
+
+//    std::vector<cv::Vec3f> circles;
 
 public:
     ImageProcesser(cv::Size camsize);

@@ -78,12 +78,14 @@ void MainWindow::processVideoAndUpdateQUI()
         NetworkStarted = true;
     }
 
-    int move = Processer->getMove(OriginalImageMat);
+    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC); //resizing the image to fit in the UI
+    cv::flip(ResizedImageMat, ResizedImageMat, 1); //eliminating the mirror effect
+
+    //Add the picture to the processer
+    int move = Processer->getMove(ResizedImageMat);
     std::cout << "move: " << move <<std::endl;
 //240,150
-    cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC); //resizing the image to fit in the UI
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
-    cv::flip(ResizedImageMat, ResizedImageMat, 1); //eliminating the mirror effect
 
     QImage OriginalImage((uchar*)ResizedImageMat.data,
                          ResizedImageMat.cols,
