@@ -22,24 +22,17 @@ class ImageProcesser
 {
 private:
     cv::Size SizeOfCamera;
-    cv::Mat HSVImage;
+    cv::Mat ProcessingImage;
     cv::Mat OutImage;
     cv::Mat Foreground;
     cv::Mat Background;
 
-    cv::BackgroundSubtractorMOG2 BackGroundSubtractor;
-
     DebugWindow DebugWin;
-
-    const cv::Scalar hsv_min = cvScalar(0, 50, 170, 0);
-    const cv::Scalar hsv_max = cvScalar(10, 180, 256, 0);
-
-    std::vector<std::vector<cv::Point> > contours;
 
 public:
     ImageProcesser(cv::Size camsize);
     void setCamSize(cv::Size camsize);
-    int getMove(cv::Mat const &CapturedImage); //Output: 0: no move, 1 right, 2 left
+    int getMove(cv::Mat CapturedImage); //Output: 0: no move, 1 right, 2 left
 };
 
 #endif // IMAGEPROCESSER_H

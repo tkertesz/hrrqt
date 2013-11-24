@@ -78,8 +78,8 @@ void MainWindow::processVideoAndUpdateQUI()
         NetworkStarted = true;
     }
 
-    //int move = Processer->getMove(OriginalImageMat);
-    //std::cout << "move: " << move <<std::endl;
+    int move = Processer->getMove(OriginalImageMat);
+    std::cout << "move: " << move <<std::endl;
 //240,150
     cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC); //resizing the image to fit in the UI
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
