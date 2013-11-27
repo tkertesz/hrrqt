@@ -61,7 +61,7 @@ private:
     Car* myCar;
     Road* myRoad;
 
-    //Other usefull variables :)
+    //Other useful variables :)
     bool NetworkStarted;
     int lives;
     int distance;

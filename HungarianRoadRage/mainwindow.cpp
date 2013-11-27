@@ -32,7 +32,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
     myRoad = new Road();
-    ui->MyLifeLCD->display(Settings::STARTLIFE);
+    //aki ezt irta annak bizony letornem a kezet, 30 perc debuggolasom ment el erre!!!!
+    //ui->MyLifeLCD->display(Settings::STARTLIFE);
+    lives = Settings::STARTLIFE;
+    ui->MyLifeLCD->display(lives);
+    //0-rol induljon a distance
+    distance = 0;
     QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
     QObject::connect(myRoad, SIGNAL(sendDistanceNumber(int)), this, SLOT(receiveDistanceNumber(int)));
     QObject::connect(myRoad, SIGNAL(stopGame(bool)), this, SLOT(lose(bool)));
@@ -96,6 +101,10 @@ void MainWindow::processVideoAndUpdateQUI()
 
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
 
+    //Sending number of lives and distance embedded in the image
+    NetworkSendImage.setText("lives", QString::number(lives));
+    NetworkSendImage.setText("distance", QString::number(distance));
+
     n->sendData(NetworkSendImage); //sending the image over the network
 
     ///Move car
@@ -106,6 +115,8 @@ void MainWindow::processVideoAndUpdateQUI()
 void MainWindow::receiveNetworkImage(QImage q)
 {
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
+    ui->NetworkLifeLCD->display(q.text("lives"));
+    ui->NetworkDistLCD->display(q.text("distance"));
 }
 
 MainWindow::~MainWindow()
