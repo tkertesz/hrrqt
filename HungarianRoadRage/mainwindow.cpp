@@ -10,9 +10,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
     {
         if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
-             MyIpAddr = address.toString();
+             MyIpAddr = address;
     }
-    ui->MyIP->setText("My ip: " + MyIpAddr);
+    ui->MyIP->setText("My ip: " + MyIpAddr.toString());
 
     CaptureCamera.open(0);
     if(CaptureCamera.isOpened() == false)

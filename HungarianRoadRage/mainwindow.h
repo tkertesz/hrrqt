@@ -54,7 +54,7 @@ private:
     ImageProcesser* Processer;
     Network* n;
 
-    QString MyIpAddr;
+    QHostAddress MyIpAddr;
 
     //Graphics
     QGraphicsScene* scene;

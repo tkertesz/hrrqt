@@ -15,6 +15,8 @@ class Network : public QObject
 public:
     explicit Network(QObject *parent = 0);
     ~Network();
+    bool setIp(QHostAddress MyIP, QString OtherIP);
+    bool Network::startBinding();
     void sendData(QImage sendimage);
 
 signals:
@@ -24,6 +26,9 @@ public slots:
     void processPendingDatagram();
 
 private:
+    bool IsStarted;
+    QHostAddress myip;
+    QHostAddress otherip;
     QUdpSocket *my_socket;
 
 };

@@ -3,24 +3,48 @@
 Network::Network(QObject *parent) :QObject(parent)
 {
     my_socket = new QUdpSocket(this);
-    if (my_socket->bind(QHostAddress::LocalHost, 45000))
+    IsStarted = false;
+}
+
+bool Network::setIp(QHostAddress MyIP, QString OtherIP):myip(MyIP)
+{
+    otherip = QHostAddress(OtherIP);
+    return true;
+}
+
+bool Network::startBinding()
+{
+    if (my_socket->bind(myip, 45000))
     {
         connect(my_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagram()));
         QCoreApplication::sendPostedEvents(); //not really necessary, but no problem :)
     }
     else
+    {
+
         qDebug("Bind problem");
+        return false;
+    }
+
+    return IsStarted = true;
 }
 
-
-//Domi, mi lenne ha itt adnank meg neki, hogy mit akarunk beleirni???
 void Network::sendData(QImage sendimage)
 {
-   QByteArray q;
-   QBuffer buffer(&q);
-   buffer.open(QIODevice::WriteOnly);
-   sendimage.save(&buffer, "JPG");
-   my_socket->writeDatagram(q.data(),q.size(), QHostAddress::LocalHost, 45000);
+   if(IsStarted)
+   {
+       QByteArray q;
+       QBuffer buffer(&q);
+       buffer.open(QIODevice::WriteOnly);
+       sendimage.save(&buffer, "JPG");
+       my_socket->writeDatagram(q.data(),q.size(), otherip, 45000);
+   }
+   else
+   {
+       qDebug("Network is not started!");
+       return;
+   }
+
 }
 
 void Network::processPendingDatagram()
