@@ -106,10 +106,10 @@
    <widget class="QLabel" name="MyIP">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>148</x>
       <y>620</y>
-      <width>29</width>
-      <height>16</height>
+      <width>231</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
