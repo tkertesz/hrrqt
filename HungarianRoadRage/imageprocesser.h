@@ -24,6 +24,8 @@ private:
     cv::Mat ProcessingImage;
     cv::Mat OutImage;
     cv::Mat AvgImage;
+    cv::Mat TresholdImage;
+    cv::Mat SqSumImage;
     cv::Mat FirstImage;
 
     bool IsFirst;

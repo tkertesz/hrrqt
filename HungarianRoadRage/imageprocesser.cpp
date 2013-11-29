@@ -24,9 +24,11 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
     }
 
     CapturedImage.copyTo(OutImage);
-    cv::cvtColor(OutImage, OutImage, CV_BGR2GRAY);
-    cv::GaussianBlur(OutImage, OutImage,cv::Size(9,9),2,2);
-    cv::absdiff(OutImage, FirstImage, ProcessingImage);
+//    cv::cvtColor(OutImage, OutImage, CV_BGR2GRAY);
+//    cv::GaussianBlur(OutImage, OutImage,cv::Size(9,9),2,2);
+    cv::threshold(OutImage,ProcessingImage,110,255,cv::THRESH_BINARY);
+    cv::integral(OutImage,ProcessingImage,SqSumImage,-10);
+//    cv::absdiff(ProcessingImage, FirstImage, ProcessingImage);
 //    CapturedImage.copyTo(ProcessingImage);
 //    ProcessingImage.copyTo(OutImage);
     //Circle
@@ -45,6 +47,7 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
 
 
     cv::imshow("Processed", ProcessingImage);
+    cv::imshow("Sq",SqSumImage);
 //    cv::imshow("Output", OutImage);
 
     std::cerr << "Processing..." <<std::endl;
