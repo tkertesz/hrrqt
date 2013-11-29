@@ -15,7 +15,6 @@ QRectF Car::boundingRect() const{
 //Kirajzolja az autót
 void Car::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     painter->drawPixmap(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT*2,carPict);
-    painter->drawRect(20,44,Settings::FIELD_WIDTH-48,Settings::FIELD_HEIGHT*2-58);
 
 }
 
