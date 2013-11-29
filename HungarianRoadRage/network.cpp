@@ -6,8 +6,9 @@ Network::Network(QObject *parent) :QObject(parent)
     IsStarted = false;
 }
 
-bool Network::setIp(QHostAddress MyIP, QString OtherIP):myip(MyIP)
+bool Network::setIp(QHostAddress MyIP, QString OtherIP)
 {
+    myip = MyIP;
     otherip = QHostAddress(OtherIP);
     return true;
 }
