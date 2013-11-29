@@ -79,6 +79,7 @@ void MainWindow::processVideoAndUpdateQUI()
     if(!NetworkStarted)
     {
         n = new Network();
+        n->setIp(MyIpAddr,QString("OTHER IP"));
         QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
         NetworkStarted = true;
     }
