@@ -24,7 +24,7 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
 //        IsFirst = false;
 //    }
 
-//    CapturedImage.copyTo(OutImage);
+    CapturedImage.copyTo(OutImage);
 /*
  *Threshold detection
  */
@@ -39,14 +39,19 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
  *Threshold detection end
  */
 
+  /*
+   *Background subtraction
+   */
+
 /*
  *Color tracking
  */
 
-    cv::cvtColor(CapturedImage,HSVImage,CV_BGR2HSV_FULL);
+    cv::cvtColor(OutImage,HSVImage,CV_BGR2HSV_FULL);
     cv::GaussianBlur(HSVImage, HSVImage,cv::Size(9,9),3,3);
     cv::inRange(HSVImage,cv::Scalar(55,55,80),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
     cv::threshold(ProcessingImage,ProcessingImage,100,200,cv::THRESH_BINARY);
+    cv::adaptiveThreshold(ProcessingImage,ProcessingImage,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
 
 
 

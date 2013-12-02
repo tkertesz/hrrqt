@@ -29,7 +29,10 @@ private:
     cv::Mat TresholdImage;
     cv::Mat SqSumImage;
     cv::Mat FirstImage;
+
     QElapsedTimer ProcessingTimer;
+
+    cv::BackgroundSubtractorMOG BSub;
 
     bool IsFirst;
 
