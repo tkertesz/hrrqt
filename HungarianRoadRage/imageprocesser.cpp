@@ -42,8 +42,9 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
  *Color tracking
  */
 
-    cv::cvtColor(CapturedImage,HSVImage,CV_BGR2HSV);
-cv::inRange(HSVImage,cv::Scalar(170,160,60),cv::Scalar(180,2556,256),ProcessingImage); //for red objects
+    cv::cvtColor(CapturedImage,HSVImage,CV_BGR2HSV_FULL);
+    cv::GaussianBlur(HSVImage, HSVImage,cv::Size(9,9),3,3);
+    cv::inRange(HSVImage,cv::Scalar(44,48,74),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
 
 
 
@@ -51,6 +52,6 @@ cv::inRange(HSVImage,cv::Scalar(170,160,60),cv::Scalar(180,2556,256),ProcessingI
 //    cv::imshow("Sq",SqSumImage);
 //    cv::imshow("Output", OutImage);
 
-    std::cerr << "Processing..." <<std::endl;
+//    std::cerr << "Processing..." <<std::endl;
     return 0;
 }
