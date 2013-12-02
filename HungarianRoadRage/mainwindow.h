@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QNetworkInterface>
 #include <QGraphicsScene>
+#include <QElapsedTimer>
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "imageprocesser.h"
@@ -60,6 +61,9 @@ private:
     QGraphicsScene* scene;
     Car* myCar;
     Road* myRoad;
+
+    //Elapsed timer :)
+    QElapsedTimer ProcUpdateElapsedTime;
 
     //Other useful variables :)
     bool NetworkStarted;

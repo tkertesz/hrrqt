@@ -16,12 +16,13 @@ void ImageProcesser::setCamSize(cv::Size camsize)
 int ImageProcesser::getMove(cv::Mat CapturedImage)
 {
     if(CapturedImage.empty()) {std::cout << "Baj van..." << std::endl; return 0;}
-    if(IsFirst)
-    {
-        CapturedImage.copyTo(FirstImage);
-        cv::cvtColor(FirstImage, FirstImage, CV_BGR2GRAY);
-        IsFirst = false;
-    }
+    ProcessingTimer.start();
+//    if(IsFirst)
+//    {
+//        CapturedImage.copyTo(FirstImage);
+//        cv::cvtColor(FirstImage, FirstImage, CV_BGR2GRAY);
+//        IsFirst = false;
+//    }
 
 //    CapturedImage.copyTo(OutImage);
 /*
@@ -44,7 +45,8 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
 
     cv::cvtColor(CapturedImage,HSVImage,CV_BGR2HSV_FULL);
     cv::GaussianBlur(HSVImage, HSVImage,cv::Size(9,9),3,3);
-    cv::inRange(HSVImage,cv::Scalar(44,48,74),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
+    cv::inRange(HSVImage,cv::Scalar(55,55,80),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
+    cv::threshold(ProcessingImage,ProcessingImage,100,200,cv::THRESH_BINARY);
 
 
 
@@ -52,6 +54,7 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
 //    cv::imshow("Sq",SqSumImage);
 //    cv::imshow("Output", OutImage);
 
-//    std::cerr << "Processing..." <<std::endl;
+    std::cerr << "Elapsed processer time: "<< ProcessingTimer.elapsed() << " msec" <<std::endl;
+
     return 0;
 }

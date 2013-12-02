@@ -26,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer = new QTimer(this);
     connect(ProcessTimer, SIGNAL(timeout()), this, SLOT(processVideoAndUpdateQUI()));
 
-    ProcessTimer->start(50);
+    ProcessTimer->start(100); //tested with QElapsedTimer, 50 was too low... it generated runtime between 60-90 msec
+                              //with this we have ~12 msec :)
 
     ///Add the graphics to graphicsview
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
@@ -67,6 +68,7 @@ void MainWindow::lose(bool isWin){
 
 void MainWindow::processVideoAndUpdateQUI()
 {
+    ProcUpdateElapsedTime.start();
     CaptureCamera.read(OriginalImageMat);
 
     if (OriginalImageMat.empty()) return;
@@ -112,6 +114,7 @@ void MainWindow::processVideoAndUpdateQUI()
 
     ///Move car
     //myRoad->moveCar(move);
+    std::cerr << "processVideoAndUpdateQUI() elapsed time: " << ProcUpdateElapsedTime.elapsed() << " msec" << std::endl << std::endl;
 }
 
 ///Public slot that receives the image from the networking thread

@@ -1,6 +1,7 @@
 #ifndef IMAGEPROCESSER_H
 #define IMAGEPROCESSER_H
 
+#include <QElapsedTimer>
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -28,6 +29,7 @@ private:
     cv::Mat TresholdImage;
     cv::Mat SqSumImage;
     cv::Mat FirstImage;
+    QElapsedTimer ProcessingTimer;
 
     bool IsFirst;
 
