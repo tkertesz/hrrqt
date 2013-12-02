@@ -23,6 +23,7 @@ private:
     cv::Size SizeOfCamera;
     cv::Mat ProcessingImage;
     cv::Mat OutImage;
+    cv::Mat HSVImage;
     cv::Mat AvgImage;
     cv::Mat TresholdImage;
     cv::Mat SqSumImage;

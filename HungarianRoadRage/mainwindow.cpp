@@ -89,8 +89,8 @@ void MainWindow::processVideoAndUpdateQUI()
     cv::flip(ResizedImageMat, ResizedImageMat, 1); //eliminating the mirror effect
 
     //Add the picture to the processer
-//    int move = Processer->getMove(ResizedImageMat);
-//    std::cout << "move: " << move <<std::endl;
+    int move = Processer->getMove(ResizedImageMat);
+    std::cout << "move: " << move <<std::endl;
 //240,150
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
 

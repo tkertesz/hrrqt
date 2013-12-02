@@ -23,31 +23,32 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
         IsFirst = false;
     }
 
-    CapturedImage.copyTo(OutImage);
+//    CapturedImage.copyTo(OutImage);
+/*
+ *Threshold detection
+ */
 //    cv::cvtColor(OutImage, OutImage, CV_BGR2GRAY);
 //    cv::GaussianBlur(OutImage, OutImage,cv::Size(9,9),2,2);
-    cv::threshold(OutImage,ProcessingImage,110,255,cv::THRESH_BINARY);
-    cv::integral(OutImage,ProcessingImage,SqSumImage,-10);
+//    cv::threshold(OutImage,ProcessingImage,110,255,cv::THRESH_BINARY);
+//    cv::integral(OutImage,ProcessingImage,SqSumImage,-10);
 //    cv::absdiff(ProcessingImage, FirstImage, ProcessingImage);
 //    CapturedImage.copyTo(ProcessingImage);
 //    ProcessingImage.copyTo(OutImage);
-    //Circle
-//    cv::GaussianBlur(ProcessingImage, ProcessingImage,cv::Size(9,9),2,2);
-//    cv::HoughCircles(ProcessingImage, circles, CV_HOUGH_GRADIENT, 1, ProcessingImage.rows/8, 100, 50, 0, 0);
+/*
+ *Threshold detection end
+ */
 
-//   for( size_t i = 0; i < circles.size(); i++ )
-//     {
-//         cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
-//         int radius = cvRound(circles[i][2]);
-//         // circle center
-//         cv::circle(OutImage, center, 3, cv::Scalar(0,255,0), -1, 8, 0 );
-//         // circle outline
-//         cv::circle(OutImage, center, radius, cv::Scalar(0,0,255), 3, 8, 0 );
-//      }
+/*
+ *Color tracking
+ */
+
+    cv::cvtColor(CapturedImage,HSVImage,CV_BGR2HSV);
+cv::inRange(HSVImage,cv::Scalar(170,160,60),cv::Scalar(180,2556,256),ProcessingImage); //for red objects
+
 
 
     cv::imshow("Processed", ProcessingImage);
-    cv::imshow("Sq",SqSumImage);
+//    cv::imshow("Sq",SqSumImage);
 //    cv::imshow("Output", OutImage);
 
     std::cerr << "Processing..." <<std::endl;
