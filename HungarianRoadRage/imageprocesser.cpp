@@ -4,6 +4,8 @@ ImageProcesser::ImageProcesser(cv::Size camsize)
 {
     SizeOfCamera = camsize;
     IsFirst = true;
+    BSub.set("nmixtures",3);
+    BSub.set("detectShadows", false);
     std::cout << "Camera size set to:\n"<< "Height: " << SizeOfCamera.height << ", Width: " << SizeOfCamera.width <<std::endl;
 }
 
@@ -42,16 +44,24 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
   /*
    *Background subtraction
    */
+    BSub.operator ()(OutImage,ForeGround);
+    cv::GaussianBlur(ForeGround, ForeGround,cv::Size(9,9),5,5);
+    cv::threshold(ForeGround,ForeGround,100,255,cv::THRESH_BINARY);
+    cv::imshow("ForeGround Binary Thresholded",ForeGround);
+    cv::adaptiveThreshold(ForeGround,ForeGround,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
+    cv::imshow("ForeGround Adaptive Thresholded",ForeGround);
+
 
 /*
  *Color tracking
  */
 
-    cv::cvtColor(OutImage,HSVImage,CV_BGR2HSV_FULL);
-    cv::GaussianBlur(HSVImage, HSVImage,cv::Size(9,9),3,3);
-    cv::inRange(HSVImage,cv::Scalar(55,55,80),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
-    cv::threshold(ProcessingImage,ProcessingImage,100,200,cv::THRESH_BINARY);
-    cv::adaptiveThreshold(ProcessingImage,ProcessingImage,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
+//    cv::cvtColor(OutImage,HSVImage,CV_BGR2HSV_FULL);
+//    cv::GaussianBlur(HSVImage, HSVImage,cv::Size(9,9),3,3);
+//    cv::inRange(HSVImage,cv::Scalar(55,55,80),cv::Scalar(255,255,255),ProcessingImage); //for europian human objects
+//    cv::threshold(ProcessingImage,ProcessingImage,100,200,cv::THRESH_BINARY);
+//    cv::adaptiveThreshold(ProcessingImage,ProcessingImage,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
+
 
 
 

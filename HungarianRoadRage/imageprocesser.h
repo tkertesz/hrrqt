@@ -29,10 +29,12 @@ private:
     cv::Mat TresholdImage;
     cv::Mat SqSumImage;
     cv::Mat FirstImage;
+    cv::Mat ForeGround;
+    cv::Mat BackGround;
 
     QElapsedTimer ProcessingTimer;
 
-    cv::BackgroundSubtractorMOG BSub;
+    cv::BackgroundSubtractorMOG2 BSub;
 
     bool IsFirst;
 
