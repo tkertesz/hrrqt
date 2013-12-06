@@ -65,7 +65,7 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
 
 
 
-    cv::imshow("Processed", ProcessingImage);
+//    cv::imshow("Processed", ProcessingImage);
 //    cv::imshow("Sq",SqSumImage);
 //    cv::imshow("Output", OutImage);
 
