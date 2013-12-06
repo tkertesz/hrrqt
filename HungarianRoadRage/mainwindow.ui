@@ -263,7 +263,7 @@
       <x>180</x>
       <y>550</y>
       <width>21</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -289,7 +289,7 @@
       <x>180</x>
       <y>240</y>
       <width>21</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -325,7 +325,7 @@
      <x>0</x>
      <y>0</y>
      <width>947</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="defaultUp">
