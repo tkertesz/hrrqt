@@ -13,9 +13,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow *w = new MainWindow;
     StartView s(0, w);
-    //StartView* sp = &s;
-    s.exec();
-    a.exec();
+    int settingsRet = s.exec();
+    if (settingsRet == QDialog::Accepted)
+        a.exec();
     /*QGraphicsView graphicView;
     QGraphicsScene *scene = new QGraphicsScene(0,0,Road::ROAD_WIDTH,Road::SCREEN_HEIGHT,&graphicView);
     graphicView.setScene(scene);
