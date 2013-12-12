@@ -1,23 +1,24 @@
 #include <QGraphicsItem>
 #include <QtGui>
-#include <iostream>
 #include "settings.h"
 
 #ifndef CAR_H
 #define CAR_H
 
+///Author: bendaf
 class Car : public QGraphicsItem
 {
-    QPixmap carPict;        //Az autó képe
+    QPixmap carPict;        // The picture of the car.
 
 protected:
-    void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
-    QRectF boundingRect() const;
+                                        // Draw the car with the painter.
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    QRectF boundingRect() const;        // The rectangle which is refreshed by the paint function.
 
 public:
-    Car(QGraphicsItem* parent = NULL);
-    QPainterPath shape() const;
-    void rotate(int deg);
+    Car(QGraphicsItem* parent = NULL);  // Load the picture of the car, and set the transform.
+    QPainterPath shape() const;         // The shape that contains the "bottom" of the car (where can conflict).
+    void rotate(const int& deg);        // Set the rotation of the car.
 };
 
 #endif // CAR_H

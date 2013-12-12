@@ -64,7 +64,7 @@ void MainWindow::receiveDistanceNumber(int i)
     ui->MyDistLCD->display(distance);
 }
 
-void MainWindow::lose(bool isWin){
+void MainWindow::lose(){
     timer.stop();
 }
 
