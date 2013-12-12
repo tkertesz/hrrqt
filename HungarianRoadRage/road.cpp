@@ -36,7 +36,6 @@ void Road::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 // Do the animating.
 void Road::advance(int step)
 {
-
     // if the step is 0 then return.
     if(!step) return;
 
@@ -68,7 +67,7 @@ void Road::advance(int step)
     if(accel>100)                                   // reset accel, increase speed.
     {
         accel=0;
-        if(speed<14)speed=qRound((double)speed+2);
+        if(speed<6)speed=qRound((double)speed+2);
         emit sendDistanceNumber(distance);          // send distance to the mainWindow.
     }
 

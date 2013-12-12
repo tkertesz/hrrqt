@@ -32,9 +32,9 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
      */
 
     LeftHand = OutImage(LeftROI);
-    cv::imshow("LeftHand",LeftHand);
+    //cv::imshow("LeftHand",LeftHand);
     RightHand = OutImage(RightROI);
-    cv::imshow("RightHand",RightHand);
+    //cv::imshow("RightHand",RightHand);
 
   /*
    *Background subtraction

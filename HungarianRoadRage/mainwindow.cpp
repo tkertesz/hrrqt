@@ -85,7 +85,7 @@ void MainWindow::processVideoAndUpdateQUI()
 
     //Add the picture to the processer
     int move = Processer->getMove(ResizedImageMat);
-    std::cout << "move: " << move <<std::endl;
+    //std::cout << "move: " << move <<std::endl;
 
     //Move the car
     if(prevmove == 0)
@@ -147,9 +147,9 @@ MainWindow::~MainWindow()
 void MainWindow::closeVideoStream()
 {
     ProcessTimer->stop();
-    std::cout << "Video process timer stopped" <<std::endl;
+    //std::cout << "Video process timer stopped" <<std::endl;
     CaptureCamera.release();
-    std::cout << "Camera released" <<std::endl;
+    //std::cout << "Camera released" <<std::endl;
 }
 
 // Kezeli a billentyűlenyomást

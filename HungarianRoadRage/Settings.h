@@ -5,8 +5,8 @@ class Settings
 {
 public:
     static const int            STARTLIFE     = 3;                  // Number of starting life.
-    static const int            FREQUENCY     = 1000/40;            // Refresh intervall of the picture.
-    static const short          STEP_SIZE     = 4;                  // Number of pixels wich shifting on one move
+    static const int            FREQUENCY     = 1000/25;            // Refresh intervall of the picture.
+    static const short          STEP_SIZE     = 1;                  // Number of pixels wich shifting on one move
     static const int            SCREEN_WIDTH  = 545;                // Width of the screen.
     static const int            SCREEN_HEIGHT = 590;                // Height of the screen.
     static const int            ROAD_HEIGHT   = 600;                // Height of the road. DO NOT CHANGE!
