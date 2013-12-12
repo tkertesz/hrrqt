@@ -72,6 +72,7 @@ private:
     int lives;
     int distance;
     int prevmove;
+    bool gameStarted;
 
 public slots:
     void processVideoAndUpdateQUI();
