@@ -2,18 +2,13 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+{}
+
+void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
 {
     ui->setupUi(this);
 
     ui->ErrorLabel->setText("No error :)");
-
-    foreach(const QHostAddress &address, QNetworkInterface::allAddresses())
-    {
-        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != QHostAddress(QHostAddress::LocalHost))
-             MyIpAddr = address;
-    }
-    ui->MyIP->setText("My ip: " + MyIpAddr.toString());
-
 
     //Camera and image processer settings
     CaptureCamera.open(0);
@@ -49,7 +44,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //Start the game
     QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
     timer.start(Settings::FREQUENCY);
-    NetworkStarted =  false;
+    MyIpAddr=myIP;
+    ui->MyIP->setText("My IP: " + MyIpAddr.toString());
+    PartnerIpAddr=partnerIP;
+    ui->PartnerIP->setText("Partner IP: " + PartnerIpAddr.toString());
+    n = new Network();
+    n->setIp(MyIpAddr,PartnerIpAddr);
+    n->startBinding();
+    QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
+    this->show();
 }
 
 void MainWindow::receiveLifeNumber(int i)
@@ -74,15 +77,6 @@ void MainWindow::processVideoAndUpdateQUI()
     CaptureCamera.read(OriginalImageMat);
 
     if (OriginalImageMat.empty()) return;
-
-    if(!NetworkStarted)
-    {
-        n = new Network();
-        n->setIp(MyIpAddr,QString("127.0.0.1"));
-        n->startBinding();
-        QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
-        NetworkStarted = true;
-    }
 
     cv::resize(OriginalImageMat, ResizedImageMat, cv::Size(352,220), 0, 0, cv::INTER_CUBIC); //resizing the image to fit in the UI
     cv::flip(ResizedImageMat, ResizedImageMat, 1); //eliminating the mirror effect

@@ -106,20 +106,20 @@
    <widget class="QLabel" name="MyIP">
     <property name="geometry">
      <rect>
-      <x>148</x>
-      <y>620</y>
+      <x>10</x>
+      <y>300</y>
       <width>231</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>MyIP</string>
+     <string>My IP:</string>
     </property>
    </widget>
    <widget class="QLabel" name="ErrorLabel">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>370</x>
       <y>620</y>
       <width>90</width>
       <height>16</height>
@@ -309,6 +309,19 @@
      <string>Distance</string>
     </property>
    </widget>
+   <widget class="QLabel" name="PartnerIP">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>620</y>
+      <width>231</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Partner IP:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -325,7 +338,7 @@
      <x>0</x>
      <y>0</y>
      <width>947</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="defaultUp">

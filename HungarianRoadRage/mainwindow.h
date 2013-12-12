@@ -25,6 +25,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void setIP(QHostAddress myIP, QHostAddress partnerIP);
     void closeVideoStream(); //Release the camera hardware and stopping the processer's timer
     ~MainWindow();
 
@@ -56,17 +57,18 @@ private:
     Network* n;
 
     QHostAddress MyIpAddr;
+    QHostAddress PartnerIpAddr;
 
     //Graphics
     QGraphicsScene* scene;
     Car* myCar;
     Road* myRoad;
 
-    //Elapsed timer :)
+    //Elapsed timer
+    //one more smileyface Tibby and I will ask you personally Y SO SERIOUS
     QElapsedTimer ProcUpdateElapsedTime;
 
-    //Other useful variables :)
-    bool NetworkStarted;
+    //Other useful variables
     int lives;
     int distance;
     int prevmove;
