@@ -109,7 +109,6 @@ void Road::advance(int step)
 
 // Side shift the car, if direction is -1 than to the left side, if 1 to the right
 // but only if it's still in the road.
-///TODO: még jobbra le tud lépni a tesztelés érdekében!
 void Road::moveCar(const short& direction)
 {
     if(direction==-1)
@@ -121,7 +120,7 @@ void Road::moveCar(const short& direction)
     }
     else if(direction==1)
     {
-        if(myCar->pos().x() + moving<Settings::SCREEN_WIDTH/2+Settings::FIELD_WIDTH*1.5)
+        if(myCar->pos().x() + moving<Settings::SCREEN_WIDTH/2+Settings::FIELD_WIDTH*0.5)
         {
             moving+=Settings::FIELD_WIDTH;
         }

@@ -38,11 +38,11 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
     distance = 0;
     QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
     QObject::connect(myRoad, SIGNAL(sendDistanceNumber(int)), this, SLOT(receiveDistanceNumber(int)));
-    QObject::connect(myRoad, SIGNAL(stopGame(bool)), this, SLOT(lose(bool)));
+    QObject::connect(myRoad, SIGNAL(stopGame()), this, SLOT(lose()));
     scene->addItem(myRoad);
 
     //Start the game
-    QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
+    QObject::connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     timer.start(Settings::FREQUENCY);
     MyIpAddr=myIP;
     ui->MyIP->setText("My IP: " + MyIpAddr.toString());
@@ -57,7 +57,7 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
 
 void MainWindow::receiveLifeNumber(int i)
 {
-    lives = i;
+    if(i>=0) lives = i;
     ui->MyLifeLCD->display(lives);
 }
 
