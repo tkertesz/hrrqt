@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     }
     ui->MyIP->setText("My ip: " + MyIpAddr.toString());
 
+
+    //Camera and image processer settings
     CaptureCamera.open(0);
     if(CaptureCamera.isOpened() == false)
     {
@@ -29,22 +31,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ProcessTimer->start(100); //tested with QElapsedTimer, 50 was too low... it generated runtime between 60-90 msec
                               //with this we have ~12 msec :)
 
-    ///Add the graphics to graphicsview
+
+    //Add the graphics to graphicsview
     scene = new QGraphicsScene(0,0,Settings::SCREEN_WIDTH,Settings::SCREEN_HEIGHT,ui->graphicsView);
     ui->graphicsView->setScene(scene);
+
+    //Other initializations
     myRoad = new Road();
-    //aki ezt irta annak bizony letornem a kezet, 30 perc debuggolasom ment el erre!!!!
-    //ui->MyLifeLCD->display(Settings::STARTLIFE);
     lives = Settings::STARTLIFE;
     ui->MyLifeLCD->display(lives);
-    //0-rol induljon a distance
     distance = 0;
     QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
     QObject::connect(myRoad, SIGNAL(sendDistanceNumber(int)), this, SLOT(receiveDistanceNumber(int)));
     QObject::connect(myRoad, SIGNAL(stopGame(bool)), this, SLOT(lose(bool)));
     scene->addItem(myRoad);
 
-    ///Start the game
+    //Start the game
     QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
     timer.start(Settings::FREQUENCY);
     NetworkStarted =  false;
@@ -73,15 +75,10 @@ void MainWindow::processVideoAndUpdateQUI()
 
     if (OriginalImageMat.empty()) return;
 
-    if(CamSize.height == 0)
-    {
-        CamSize = OriginalImageMat.size();
-        Processer->setCamSize(CamSize);
-    }
     if(!NetworkStarted)
     {
         n = new Network();
-        n->setIp(MyIpAddr,QString("192.168.255.105"));
+        n->setIp(MyIpAddr,QString("127.0.0.1"));
         n->startBinding();
         QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
         NetworkStarted = true;
@@ -93,7 +90,7 @@ void MainWindow::processVideoAndUpdateQUI()
     //Add the picture to the processer
     int move = Processer->getMove(ResizedImageMat);
     std::cout << "move: " << move <<std::endl;
-//240,150
+
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
 
     QImage OriginalImage((uchar*)ResizedImageMat.data,
@@ -112,12 +109,12 @@ void MainWindow::processVideoAndUpdateQUI()
 
     n->sendData(NetworkSendImage); //sending the image over the network
 
-    ///Move car
-    //myRoad->moveCar(move);
-    std::cerr << "processVideoAndUpdateQUI() elapsed time: " << ProcUpdateElapsedTime.elapsed() << " msec" << std::endl << std::endl;
+    //Move the car
+    myRoad->moveCar(move);
+//    std::cerr << "processVideoAndUpdateQUI() elapsed time: " << ProcUpdateElapsedTime.elapsed() << " msec" << std::endl << std::endl;
 }
 
-///Public slot that receives the image from the networking thread
+//Public slot that receives the image from the networking thread
 void MainWindow::receiveNetworkImage(QImage q)
 {
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui

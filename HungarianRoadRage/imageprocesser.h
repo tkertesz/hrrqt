@@ -29,12 +29,20 @@ private:
     cv::Mat TresholdImage;
     cv::Mat SqSumImage;
     cv::Mat FirstImage;
-    cv::Mat ForeGround;
-    cv::Mat BackGround;
+
+    cv::Mat ForeGroundLeft;
+    cv::Mat BackGroundLeft;
+    cv::Mat LeftHand;
+    cv::Mat ForeGroundRight;
+    cv::Mat BackGroundRight;
+    cv::Mat RightHand;
+    cv::Rect LeftROI;
+    cv::Rect RightROI;
 
     QElapsedTimer ProcessingTimer;
 
-    cv::BackgroundSubtractorMOG2 BSub;
+    cv::BackgroundSubtractorMOG2 BSubLeft;
+    cv::BackgroundSubtractorMOG2 BSubRight;
 
     bool IsFirst;
 
