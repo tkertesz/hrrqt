@@ -90,6 +90,8 @@ void MainWindow::processVideoAndUpdateQUI()
     //Add the picture to the processer
     int move = Processer->getMove(ResizedImageMat);
     std::cout << "move: " << move <<std::endl;
+    //Move the car
+    myRoad->moveCar(move);
 
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
 
@@ -109,8 +111,6 @@ void MainWindow::processVideoAndUpdateQUI()
 
     n->sendData(NetworkSendImage); //sending the image over the network
 
-    //Move the car
-    myRoad->moveCar(move);
 //    std::cerr << "processVideoAndUpdateQUI() elapsed time: " << ProcUpdateElapsedTime.elapsed() << " msec" << std::endl << std::endl;
 }
 
