@@ -41,9 +41,7 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
     QObject::connect(myRoad, SIGNAL(stopGame(bool)), this, SLOT(lose(bool)));
     scene->addItem(myRoad);
 
-    //Start the game
-    QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
-    timer.start(Settings::FREQUENCY);
+
     MyIpAddr=myIP;
     ui->MyIP->setText("My IP: " + MyIpAddr.toString());
     PartnerIpAddr=partnerIP;
@@ -52,6 +50,7 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
     n->setIp(MyIpAddr,PartnerIpAddr);
     n->startBinding();
     QObject::connect(n, SIGNAL(receivedImage(QImage)), this, SLOT(receiveNetworkImage(QImage)));
+    gameStarted = false;
     this->show();
 }
 
@@ -118,6 +117,13 @@ void MainWindow::processVideoAndUpdateQUI()
 //Public slot that receives the image from the networking thread
 void MainWindow::receiveNetworkImage(QImage q)
 {
+    if (!gameStarted)
+    {
+        //Start the game
+        QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
+        timer.start(Settings::FREQUENCY);
+        gameStarted = true;
+    }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
     ui->NetworkLifeLCD->display(q.text("lives"));
     ui->NetworkDistLCD->display(q.text("distance"));

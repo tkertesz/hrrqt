@@ -100,7 +100,10 @@
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>NetworkCamVideo</string>
+     <string>Waiting for other player...</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="MyIP">

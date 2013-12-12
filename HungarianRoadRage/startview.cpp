@@ -5,8 +5,13 @@
 #include <QMessageBox>
 
 void StartView::startMain(){
-    QHostAddress partner(ui->partnerIP->text());
+    QString p = ui->partnerIP->text();
     QHostAddress me(ui->myIPlist->currentText());
+    QHostAddress partner;
+    if (p.isEmpty())
+        partner = me;
+    else
+        partner = QHostAddress(p);
     if (partner.protocol() != QAbstractSocket::IPv4Protocol) {
         QMessageBox mb;
         mb.setText("Invalid IP address");
