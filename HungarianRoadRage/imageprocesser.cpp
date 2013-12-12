@@ -12,7 +12,7 @@ ImageProcesser::ImageProcesser(cv::Size camsize)
     BSubRight.set("detectShadows", false);
 
     LeftROI = cv::Rect(0, 10, 110, 130);
-    RightROI = cv::Rect(250,0,100,130);
+    RightROI = cv::Rect(250,0,102,130);
 }
 
 void ImageProcesser::setCamSize(cv::Size camsize)

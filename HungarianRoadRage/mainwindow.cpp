@@ -90,10 +90,17 @@ void MainWindow::processVideoAndUpdateQUI()
     //Add the picture to the processer
     int move = Processer->getMove(ResizedImageMat);
     std::cout << "move: " << move <<std::endl;
+
     //Move the car
-    myRoad->moveCar(move);
+    if(prevmove == 0)
+    {
+        myRoad->moveCar(move);
+    }
+    prevmove = move;
 
     cv::cvtColor(ResizedImageMat, ResizedImageMat, CV_BGR2RGB); //converting the image to RGB
+    cv::rectangle(ResizedImageMat,cv::Rect(0, 0, 100, 130),cv::Scalar(200));
+    cv::rectangle(ResizedImageMat,cv::Rect(250,0,102,130),cv::Scalar(200));
 
     QImage OriginalImage((uchar*)ResizedImageMat.data,
                          ResizedImageMat.cols,

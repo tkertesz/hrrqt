@@ -69,6 +69,7 @@ private:
     bool NetworkStarted;
     int lives;
     int distance;
+    int prevmove;
 
 public slots:
     void processVideoAndUpdateQUI();
