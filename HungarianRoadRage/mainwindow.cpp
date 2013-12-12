@@ -59,8 +59,8 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
 
 void MainWindow::receiveLifeNumber(int i)
 {
-    if(i>=0) lives = i;
-    ui->MyLifeLCD->display(lives);
+    lives = i;
+    if(lives>=0) ui->MyLifeLCD->display(lives);
 }
 
 void MainWindow::receiveDistanceNumber(int i)
@@ -128,7 +128,8 @@ void MainWindow::receiveNetworkImage(QImage q)
         gameStarted = true;
     }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
-    ui->NetworkLifeLCD->display(q.text("lives"));
+    if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
+    else timer.stop();
     ui->NetworkDistLCD->display(q.text("distance"));
 }
 
