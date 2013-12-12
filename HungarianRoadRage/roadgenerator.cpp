@@ -4,8 +4,9 @@
 RoadGenerator::RoadGenerator()
 {
     gate=1;
-    readRoadFromFile("debug/roads/easyRoads.rds",1);
-    readRoadFromFile("debug/roads/normalRoads.rds",2);
+    readRoadFromFile("debug/roads/beginnerRoads.rds",1);
+    readRoadFromFile("debug/roads/easyRoads.rds",2);
+    readRoadFromFile("debug/roads/normalRoads.rds",3);
 }
 
 // Read road from file
@@ -19,15 +20,17 @@ void RoadGenerator::readRoadFromFile(const std::string &fileName, const int &dif
     // Exit if file opening failed
     if (!infile.is_open())
     {
-        /// TODO: Send exception.
         return;
     }
 
     // Start reading data
     bool idbool;
+    std::vector<RoadSample> roads0;
+    std::vector<RoadSample> roads1;
+    std::vector<RoadSample> roads2;
     while (!infile.eof())
     {
-        roadSample roadSample;
+        RoadSample roadSample;
         infile >> roadSample.in >> roadSample.out;
         for(int i=0; i<6; i++)
         {
@@ -39,18 +42,27 @@ void RoadGenerator::readRoadFromFile(const std::string &fileName, const int &dif
             }
             roadSample.road.push_back(idVec);
         }
-        if(diff==1)
-        {
-            if (roadSample.in == 0)     easyRoads0.push_back(roadSample);
-            else if(roadSample.in == 1) easyRoads1.push_back(roadSample);
-            else if(roadSample.in == 2) easyRoads2.push_back(roadSample);
-        }
-        else if(diff==2)
-        {
-            if (roadSample.in == 0)     normalRoads0.push_back(roadSample);
-            else if(roadSample.in == 1) normalRoads1.push_back(roadSample);
-            else if(roadSample.in == 2) normalRoads2.push_back(roadSample);
-        }
+        if (roadSample.in == 0)     roads0.push_back(roadSample);
+        else if(roadSample.in == 1) roads1.push_back(roadSample);
+        else if(roadSample.in == 2) roads2.push_back(roadSample);
+    }
+    if(diff == 1)
+    {
+        beginnerRoads.push_back(roads0);
+        beginnerRoads.push_back(roads1);
+        beginnerRoads.push_back(roads2);
+    }
+    else if(diff==2)
+    {
+        easyRoads.push_back(roads0);
+        easyRoads.push_back(roads1);
+        easyRoads.push_back(roads2);
+    }
+    else if(diff==3)
+    {
+        normalRoads.push_back(roads0);
+        normalRoads.push_back(roads1);
+        normalRoads.push_back(roads2);
     }
     infile.close();
 }
@@ -59,51 +71,31 @@ void RoadGenerator::readRoadFromFile(const std::string &fileName, const int &dif
 std::vector<std::vector<bool> > RoadGenerator::getRoad(const unsigned short &diff)
 {
     int randInt(0);
+    int gateHolder;
     if(diff == 1)
     {
-        if(gate == 0)
-        {
-            randInt = rand()%easyRoads0.size();
-            gate=easyRoads0[randInt].out;
-            return easyRoads0[randInt].road;
-        }
-        else if (gate == 1)
-        {
-            randInt = rand()%easyRoads1.size();
-            gate=easyRoads1[randInt].out;
-            return easyRoads1[randInt].road;
-        }
-        else
-        {
-            randInt = rand()%easyRoads2.size();
-            gate=easyRoads2[randInt].out;
-            return easyRoads2[randInt].road;
-        }
+        gateHolder = gate;
+        randInt = rand()%beginnerRoads.at(gateHolder).size();
+        gate = beginnerRoads.at(gateHolder).at(randInt).out;
+        return beginnerRoads.at(gateHolder).at(randInt).road;
     }
     else if(diff == 2)
     {
-        if(gate == 0)
-        {
-            randInt = rand()%normalRoads0.size();
-            gate=normalRoads0[randInt].out;
-            return normalRoads0[randInt].road;
-        }
-        else if (gate == 1)
-        {
-            randInt = rand()%normalRoads1.size();
-            gate=normalRoads1[randInt].out;
-            return normalRoads1[randInt].road;
-        }
-        else
-        {
-            randInt = rand()%normalRoads2.size();
-            gate=normalRoads2[randInt].out;
-            return normalRoads2[randInt].road;
-        }
+        gateHolder = gate;
+        randInt = rand()%easyRoads.at(gateHolder).size();
+        gate = easyRoads.at(gateHolder).at(randInt).out;
+        return easyRoads.at(gateHolder).at(randInt).road;
+    }
+    else if(diff == 3)
+    {
+        gateHolder = gate;
+        randInt = rand()%normalRoads.at(gateHolder).size();
+        gate = normalRoads.at(gateHolder).at(randInt).out;
+        return normalRoads.at(gateHolder).at(randInt).road;
     }
     else
     {
-        roadSample idS;
-        return idS.road;
+        RoadSample idRoad;
+        return idRoad.road;
     }
 }
