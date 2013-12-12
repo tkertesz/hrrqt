@@ -1,22 +1,26 @@
 #include "pothole.h"
 
-//Betölti a képet
+// The pothole picture is from "debug/images/pothole.png", and a random rotation add.
 Pothole::Pothole(QGraphicsItem* parent): QGraphicsItem(parent),depth(1)
 {
     potholePict.load("debug/images/pothole.png");
+    setTransformOriginPoint(Settings::FIELD_WIDTH/2,Settings::FIELD_HEIGHT/2);
+    setRotation(rand()%360);
 }
 
-//Egy kocka tartalmazza a kátyút
-QRectF Pothole::boundingRect() const{
+// The rectangle is from (0,0) to (Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT).
+QRectF Pothole::boundingRect() const
+{
     return QRectF(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT);
 }
 
-//Kirajzolja a kátyút
-void Pothole::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+//Draw the potholePict.
+void Pothole::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
     painter->drawPixmap(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT,potholePict);
 }
 
-//Visszatér a kátyú széleivel
+// The path is an ellipse with center (53,50) and 43 width and 35 height.
 QPainterPath Pothole::shape() const
 {
     QPainterPath path;
@@ -24,9 +28,11 @@ QPainterPath Pothole::shape() const
     return path;
 }
 
-//Ha ütközik az autóval visszatér 1-el ha már ütközött vele az autó visszatér 0-val.
-unsigned short Pothole::conflict(){
-    if(depth>0){
+//Return the depth and decrease it if it's bigger than 0.
+unsigned short Pothole::conflict()
+{
+    if(depth>0)
+    {
         depth--;
         return 1;
     }

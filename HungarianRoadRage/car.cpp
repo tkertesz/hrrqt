@@ -1,24 +1,26 @@
 #include "car.h"
 
-//Betölti a képet
+// The car picture is from "debug/images/car.png", and the transform is the center of the car.
 Car::Car(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
     carPict.load("debug/images/car.png");
     setTransformOriginPoint(Settings::FIELD_WIDTH/2,Settings::FIELD_HEIGHT);
 }
 
-//Két kockányi egység tartalmazza az autót
-QRectF Car::boundingRect() const{
+// The rectangle is from (0,0) and Settings::FIELD_WIDTH width and twice Settings::FIELD_HEIGHT height.
+QRectF Car::boundingRect() const
+{
     return QRectF(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT*2);
 }
 
-//Kirajzolja az autót
-void Car::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+//Draw the carPict.
+void Car::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
     painter->drawPixmap(0,0,Settings::FIELD_WIDTH,Settings::FIELD_HEIGHT*2,carPict);
 
 }
 
-//Visszatér az autó széleivel
+// The shape is from (20,44) to (Settings::FIELD_WIDTH-48,Settings::FIELD_HEIGHT*2-58).
 QPainterPath Car::shape() const
 {
     QPainterPath path;
@@ -26,7 +28,8 @@ QPainterPath Car::shape() const
     return path;
 }
 
-void Car::rotate(int deg){
-    //std::cout<<transformOriginPoint().rx()<<" "<<transformOriginPoint().ry()<<std::endl;
+//Set the is deg degree.
+void Car::rotate(const int &deg)
+{
     setRotation(deg);
 }
