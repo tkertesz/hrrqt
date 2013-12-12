@@ -6,10 +6,10 @@ Network::Network(QObject *parent) :QObject(parent)
     IsStarted = false;
 }
 
-bool Network::setIp(QHostAddress MyIP, QString OtherIP)
+bool Network::setIp(QHostAddress MyIP, QHostAddress OtherIP)
 {
     myip = MyIP;
-    otherip = QHostAddress(OtherIP);
+    otherip = OtherIP;
     return true;
 }
 
@@ -22,7 +22,6 @@ bool Network::startBinding()
     }
     else
     {
-
         qDebug("Bind problem");
         return false;
     }
@@ -56,8 +55,10 @@ void Network::processPendingDatagram()
         QHostAddress sender;
         quint16 senderPort = 45000;
         datagram.resize(my_socket->pendingDatagramSize());
-//Domi itt majd a senderPort-ot meg a sendert beallitjuk a masik IP-re es akkor nem lesz beleszolas mashonnan :)
         my_socket->readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
+        //check to only allow packets from the other party, not from anyone
+        if (sender.toString() == otherip.toString())
+        {
         QImage recv_image;
         if (datagram.isNull())
             qDebug("Empty incoming datagram");
@@ -66,6 +67,7 @@ void Network::processPendingDatagram()
         if (recv_image.isNull())		      // Check if the image was indeed received
                 qDebug("The image is null. Something failed.");
         emit receivedImage(recv_image);
+        }
    }
 }
 

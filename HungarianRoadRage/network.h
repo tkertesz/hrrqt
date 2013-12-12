@@ -15,7 +15,7 @@ class Network : public QObject
 public:
     explicit Network(QObject *parent = 0);
     ~Network();
-    bool setIp(QHostAddress MyIP, QString OtherIP);
+    bool setIp(QHostAddress MyIP, QHostAddress OtherIP);
     bool startBinding();
     void sendData(QImage sendimage);
 
