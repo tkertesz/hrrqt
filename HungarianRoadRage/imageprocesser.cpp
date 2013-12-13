@@ -44,14 +44,14 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
     cv::GaussianBlur(ForeGroundLeft, ForeGroundLeft,cv::Size(9,9),5,5);
     cv::threshold(ForeGroundLeft,ForeGroundLeft,100,255,cv::THRESH_BINARY);
     cv::adaptiveThreshold(ForeGroundLeft,ForeGroundLeft,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
-    cv::imshow("Left",ForeGroundLeft);
+//    cv::imshow("Left",ForeGroundLeft);
 
     //Right hand
     BSubRight.operator ()(RightHand,ForeGroundRight);
     cv::GaussianBlur(ForeGroundRight, ForeGroundRight,cv::Size(9,9),5,5);
     cv::threshold(ForeGroundRight,ForeGroundRight,100,255,cv::THRESH_BINARY);
     cv::adaptiveThreshold(ForeGroundRight,ForeGroundRight,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
-    cv::imshow("Right",ForeGroundRight);
+//    cv::imshow("Right",ForeGroundRight);
 
 //    std::cerr << "Nonzero: " << cv::countNonZero(ForeGroundRight) << std::endl;
 //    std::cerr << "Elapsed processer time: "<< ProcessingTimer.elapsed() << " msec" <<std::endl;
