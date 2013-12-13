@@ -169,6 +169,7 @@ void MainWindow::restart()
         ui->MyLifeLCD->display(lives);
         distance = 0;
         ui->MyDistLCD->display(distance);
+        scene->addItem(myRoad);
         timer.start(Settings::FREQUENCY);
 }
 
