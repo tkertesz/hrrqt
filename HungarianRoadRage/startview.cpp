@@ -32,7 +32,7 @@ StartView::StartView(QWidget *parent, MainWindow* mw) :
     QList<QHostAddress> list=QNetworkInterface::allAddresses();
     QString str;
     for (int i = 0; i < list.size(); ++i) {
-        if (!(list.at(i).toString().contains("::")) && !(list.at(i).toString().contains("169"))){
+        if (!(list.at(i).toString().contains(":")) && !(list.at(i).toString().contains("169"))){
             ui->myIPlist->addItem(list.at(i).toString());
         }
     }
