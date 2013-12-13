@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {}
@@ -70,6 +71,16 @@ void MainWindow::receiveDistanceNumber(int i)
 
 void MainWindow::lose(){
     timer.stop();
+    QMessageBox::StandardButton reply;
+      reply = QMessageBox::question(this, "Rematch", "Would you like to restart the game?",
+                                    QMessageBox::Yes|QMessageBox::No);
+      if (reply == QMessageBox::Yes) {
+          restart();
+      } else {
+          closeVideoStream();
+          close();
+          exit(0);
+      }
 }
 
 void MainWindow::processVideoAndUpdateQUI()
@@ -127,7 +138,7 @@ void MainWindow::receiveNetworkImage(QImage q)
     }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
     if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
-    else timer.stop();
+    else lose();
     ui->NetworkDistLCD->display(q.text("distance"));
 }
 
@@ -148,6 +159,17 @@ void MainWindow::closeVideoStream()
     //std::cout << "Video process timer stopped" <<std::endl;
     CaptureCamera.release();
     //std::cout << "Camera released" <<std::endl;
+}
+
+void MainWindow::restart()
+{
+        delete(myRoad);
+        myRoad = new Road();
+        lives = Settings::STARTLIFE;
+        ui->MyLifeLCD->display(lives);
+        distance = 0;
+        ui->MyDistLCD->display(distance);
+        timer.start(Settings::FREQUENCY);
 }
 
 // Kezeli a billentyűlenyomást
