@@ -123,7 +123,7 @@ void MainWindow::processVideoAndUpdateQUI()
     NetworkSendImage.setText("distance", QString::number(distance));
 
     n->sendData(NetworkSendImage); //sending the image over the network
-    if(lives >=0)
+    if(lives < 0)
     {
         lose();
     }
@@ -144,9 +144,6 @@ void MainWindow::receiveNetworkImage(QImage q)
     std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
     if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
     else{
-        NetworkSendImage.setText("lives", QString::number(-1));
-        NetworkSendImage.setText("distance", QString::number(distance));
-        n->sendData(NetworkSendImage);
         lose();
     }
     //else timer.stop();
