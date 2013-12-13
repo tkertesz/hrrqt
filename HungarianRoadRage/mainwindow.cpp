@@ -163,7 +163,7 @@ void MainWindow::closeVideoStream()
 
 void MainWindow::restart()
 {
-        delete(myRoad);
+        delete myRoad;
         myRoad = new Road();
         lives = Settings::STARTLIFE;
         ui->MyLifeLCD->display(lives);
