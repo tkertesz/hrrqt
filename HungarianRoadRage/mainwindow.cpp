@@ -39,7 +39,6 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
     distance = 0;
     QObject::connect(myRoad, SIGNAL(sendLifeNumber(int)), this, SLOT(receiveLifeNumber(int)));
     QObject::connect(myRoad, SIGNAL(sendDistanceNumber(int)), this, SLOT(receiveDistanceNumber(int)));
-    QObject::connect(myRoad, SIGNAL(stopGame()), this, SLOT(lose()));
     scene->addItem(myRoad);
 
     //Start the game
@@ -71,8 +70,13 @@ void MainWindow::receiveDistanceNumber(int i)
 
 void MainWindow::lose(){
     timer.stop();
+    QString msg;
+    if (lives <0)
+        msg = "You lost, I'm sorry...\n\nWould you like to restart the game?";
+    else
+        msg = "YOU WON, congratulations!\n\nWould you like to restart the game?";
     QMessageBox::StandardButton reply;
-      reply = QMessageBox::question(this, "Rematch", "Would you like to restart the game?",
+      reply = QMessageBox::question(this, "Rematch", msg,
                                     QMessageBox::Yes|QMessageBox::No);
       if (reply == QMessageBox::Yes) {
           restart();
@@ -141,7 +145,7 @@ void MainWindow::receiveNetworkImage(QImage q)
         gameStarted = true;
     }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
-    std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
+    //std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
     if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
     else{
         lose();
