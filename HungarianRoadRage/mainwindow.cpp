@@ -43,7 +43,6 @@ void MainWindow::setIP(QHostAddress myIP, QHostAddress partnerIP)
 
     //Start the game
     QObject::connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    timer.start(Settings::FREQUENCY);
 
     MyIpAddr=myIP;
     ui->MyIP->setText("My IP: " + MyIpAddr.toString());
@@ -123,7 +122,6 @@ void MainWindow::receiveNetworkImage(QImage q)
     if (!gameStarted)
     {
         //Start the game
-        QObject::connect(&timer, SIGNAL(timeout()),scene, SLOT(advance()));
         timer.start(Settings::FREQUENCY);
         gameStarted = true;
     }
