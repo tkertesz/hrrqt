@@ -113,7 +113,7 @@ void MainWindow::processVideoAndUpdateQUI()
                          ResizedImageMat.rows,
                          ResizedImageMat.step,
                          QImage::Format_RGB888); //Creating the QImage for the label
-    QImage NetworkSendImage = OriginalImage;
+    NetworkSendImage = OriginalImage;
     NetworkSendImage = NetworkSendImage.scaledToHeight(165);
 
     ui->MyVideoLabel->setPixmap(QPixmap::fromImage(OriginalImage));
@@ -137,8 +137,15 @@ void MainWindow::receiveNetworkImage(QImage q)
         gameStarted = true;
     }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
-    if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
-    else lose();
+    std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
+    if(q.text("lives").toInt()>=0 || lives >=0) ui->NetworkLifeLCD->display(q.text("lives"));
+    else{
+        NetworkSendImage.setText("lives", QString::number(lives));
+        NetworkSendImage.setText("distance", QString::number(distance));
+        n->sendData(NetworkSendImage);
+        lose();
+    }
+    //else timer.stop();
     ui->NetworkDistLCD->display(q.text("distance"));
 }
 
