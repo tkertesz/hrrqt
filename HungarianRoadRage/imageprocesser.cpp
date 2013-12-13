@@ -53,11 +53,11 @@ int ImageProcesser::getMove(cv::Mat CapturedImage)
     cv::adaptiveThreshold(ForeGroundRight,ForeGroundRight,255,cv::ADAPTIVE_THRESH_GAUSSIAN_C,cv::THRESH_BINARY,7,0.1);
 //    cv::imshow("Right",ForeGroundRight);
 
-    std::cerr << "Nonzero: " << cv::countNonZero(ForeGroundRight) << std::endl;
+//    std::cerr << "Nonzero: " << cv::countNonZero(ForeGroundRight) << std::endl;
 //    std::cerr << "Elapsed processer time: "<< ProcessingTimer.elapsed() << " msec" <<std::endl;
 
-    if(14300 - cv::countNonZero(ForeGroundLeft) > 1500) return -1;
-    if(13260 - cv::countNonZero(ForeGroundRight) > 1200) return 1;
+    if(14300 - cv::countNonZero(ForeGroundLeft) > 1000) return -1;
+    if(13260 - cv::countNonZero(ForeGroundRight) > 900) return 1;
 
     return 0;
 }
