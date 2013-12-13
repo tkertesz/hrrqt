@@ -140,7 +140,7 @@ void MainWindow::receiveNetworkImage(QImage q)
     std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
     if(q.text("lives").toInt()>=0 || lives >=0) ui->NetworkLifeLCD->display(q.text("lives"));
     else{
-        NetworkSendImage.setText("lives", QString::number(lives));
+        NetworkSendImage.setText("lives", QString::number(-1));
         NetworkSendImage.setText("distance", QString::number(distance));
         n->sendData(NetworkSendImage);
         lose();

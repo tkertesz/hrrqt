@@ -92,10 +92,6 @@ void Road::advance(int step)
                 accel=0;
                 life-=depth;
                 isLifeDisplayed=false;          // the new life number is not displayed.
-                if(life<0)
-                {
-                    emit stopGame();            // stop the game.
-                }
             }
             if(!isLifeDisplayed)
             {
