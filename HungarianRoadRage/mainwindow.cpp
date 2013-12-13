@@ -123,6 +123,10 @@ void MainWindow::processVideoAndUpdateQUI()
     NetworkSendImage.setText("distance", QString::number(distance));
 
     n->sendData(NetworkSendImage); //sending the image over the network
+    if(lives >=0)
+    {
+        lose();
+    }
 
 //    std::cerr << "processVideoAndUpdateQUI() elapsed time: " << ProcUpdateElapsedTime.elapsed() << " msec" << std::endl << std::endl;
 }
@@ -138,7 +142,7 @@ void MainWindow::receiveNetworkImage(QImage q)
     }
     ui->NetworkCamVideo->setPixmap(QPixmap::fromImage(q)); //putting the received image to the gui
     std::cout << "network lives: " << q.text("lives").toInt() << std::endl;
-    if(q.text("lives").toInt()>=0 || lives >=0) ui->NetworkLifeLCD->display(q.text("lives"));
+    if(q.text("lives").toInt()>=0) ui->NetworkLifeLCD->display(q.text("lives"));
     else{
         NetworkSendImage.setText("lives", QString::number(-1));
         NetworkSendImage.setText("distance", QString::number(distance));
