@@ -42,7 +42,6 @@ public:                                         // Initialize
 signals:
     void sendLifeNumber(const int& life);       // Send the number of lifes to the mainWindow.
     void sendDistanceNumber(const int& distance);//Send the distance to the mainWindow.
-    void stopGame();                            // Finish the game.
 };
 
 #endif // ROAD_H
