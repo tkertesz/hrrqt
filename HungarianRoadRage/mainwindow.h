@@ -34,7 +34,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
-
+    void restart();
     //CV
     cv::VideoCapture CaptureCamera;
     cv::Size CamSize;
