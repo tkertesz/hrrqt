@@ -127,7 +127,7 @@ void MainWindow::processVideoAndUpdateQUI()
     NetworkSendImage.setText("distance", QString::number(distance));
 
     n->sendData(NetworkSendImage); //sending the image over the network
-    if(lives < 0)
+    if(lives < 0 && PartnerIpAddr.toString()!=MyIpAddr.toString())
     {
         lose();
     }
