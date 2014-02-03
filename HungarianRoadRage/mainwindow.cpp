@@ -189,10 +189,10 @@ void MainWindow::restart()
 void MainWindow::keyPressEvent(QKeyEvent *event){
     switch (event->key())
     {
-        case Qt::Key_Right:
+        case Qt::Key_N:
                 myRoad->moveCar(1); //turn right;
             break;
-        case Qt::Key_Left:
+        case Qt::Key_B:
                 myRoad->moveCar(-1); //turn left;
             break;
         case Qt::Key_Escape:
@@ -202,5 +202,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
             break;
         default:
             break;
-    }
+    }   
+}
+
+// Handle the close window event
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+    closeVideoStream();
+    event->accept();
 }

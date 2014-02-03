@@ -31,6 +31,7 @@ public:
 
 protected:
     void keyPressEvent(QKeyEvent *); //Handling the key press events
+    void closeEvent (QCloseEvent *event); //Handling the close event
 
 private:
     Ui::MainWindow *ui;
