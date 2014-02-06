@@ -56,6 +56,8 @@ OSXMACHINE {
 
     QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.7
     LIBS += -stdlib=libc++ -mmacosx-version-min=10.7
+
+    ICON = icon.ico
 }
 
 #Windows config
@@ -74,6 +76,8 @@ WINDOWSMACHINE{
 
     QMAKE_BUNDLE_DATA += APP_IMAGE_FILES
     QMAKE_BUNDLE_DATA += APP_ROAD_FILES
+
+    RC_FILE = HungarianRoadRage.rc
 
     INCLUDEPATH += C://OpenCV//OpenCV_bin//install//include
     LIBS += C://OpenCV//OpenCV_bin//bin//*.dll
